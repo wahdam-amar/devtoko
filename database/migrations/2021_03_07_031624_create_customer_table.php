@@ -20,8 +20,9 @@ class CreateCustomerTable extends Migration
             $table->string('phone')->unique()->nullable();
             $table->string('city');
             $table->string('status');
-            $table->index('phone');
             $table->timestamps();
+
+            $table->index('phone');
         });
     }
 
