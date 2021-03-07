@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="bg-white p-6 rounded shadow mt-4">
-    <h2 class="text-2xl font-medium">New Customer</h2>
+    <h2 class="text-2xl font-medium">Customer</h2>
     <div class="mt-4">
 
         @include('component.error')

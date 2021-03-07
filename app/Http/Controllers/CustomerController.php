@@ -55,10 +55,10 @@ class CustomerController extends Controller
             $customer->city = $request->city;
             $customer->status = 'AC';
             $customer->save();
-            return dd($customer);
+            return redirect()->route('customer.edit', $customer->id)->with('message', $customer->name . ' Sukses di buat');
         }
 
-        return back()->withErrors($validator, 'login');
+        return back()->withErrors($validated, 'login');
     }
 
     /**
@@ -94,7 +94,24 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'address' => 'required',
+            'phone' => 'required|numeric|unique:customer,phone,' . $customer->id,
+            'city' => 'required',
+        ]);
+
+        if ($validated) {
+            $customer->name = $request->name;
+            $customer->address = $request->address;
+            $customer->phone = $request->phone;
+            $customer->city = $request->city;
+            $customer->status = 'AC';
+            $customer->save();
+            return redirect()->route('customer.edit', $customer->id)->with('message', $customer->name . ' Sukses di ubah');
+        }
+
+        return back()->withErrors($validated, 'login');
     }
 
     /**
