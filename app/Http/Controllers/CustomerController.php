@@ -14,7 +14,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::where('status', 'AC')->paginate(15);
+
+
+        return view('customer.index')->with('customer', $customer);
     }
 
     /**

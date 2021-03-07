@@ -18,9 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/customer', function () {
-    return view('customer.index');
-});
+Route::get('/customer', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customer.index');
 
 Auth::routes();
 

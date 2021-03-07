@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+@dump($customer)
+
 <div x-data="app()" x-init="[initDate(), getNoOfDays()]" x-cloak>
-    <div class="container">
+    <div class="container min-w-full">
         <div class="mb-5 w-64">
 
-            <label for="datepicker" class="font-bold mb-1 text-gray-700 block">Select Date</label>
             <div class="relative">
                 <input type="hidden" name="date" x-ref="date">
                 <input type="text" readonly x-model="datepickerValue" @click="showDatepicker = !showDatepicker"
@@ -19,11 +21,6 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                 </div>
-
-
-                {{-- <div x-text="no_of_days.length"></div>
-                        <div x-text="32 - new Date(year, month, 32).getDate()"></div>
-                        <div x-text="new Date(year, month).getDay()"></div> --}}
 
                 <div class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0" style="width: 17rem"
                     x-show.transition="showDatepicker" @click.away="showDatepicker = false">
@@ -79,22 +76,28 @@
                         </template>
                     </div>
                 </div>
-
             </div>
         </div>
-        @endsection
 
-        @push('css')
-        <style>
-            [x-cloak] {
-                display: none;
-            }
-        </style>
-        @endpush
+        @include('component.alert')
 
-        @push('scripts')
-        <script>
-            const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    </div>
+</div>
+
+
+@endsection
+
+@push('css')
+<style>
+    [x-cloak] {
+        display: none;
+    }
+</style>
+@endpush
+
+@push('scripts')
+<script>
+    const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
           const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
           function app() {
@@ -153,7 +156,6 @@
                   }
               }
           }
-        </script>
-    </div>
-</div>
+</script>
+
 @endpush
