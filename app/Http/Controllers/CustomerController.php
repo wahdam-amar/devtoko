@@ -38,7 +38,27 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'address' => 'required',
+            'phone' => 'required|unique:customer,phone|numeric',
+            'city' => 'required',
+        ]);
+
+        if ($validated) {
+            $customer = new Customer;
+            $customer->name = $request->name;
+            $customer->address = $request->address;
+            $customer->phone = $request->phone;
+            $customer->city = $request->city;
+            $customer->status = 'AC';
+            $customer->save();
+            return dd($customer);
+        }
+
+        return back()->withErrors($validator, 'login');
     }
 
     /**

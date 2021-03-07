@@ -120,17 +120,12 @@
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-                                            <button
-                                                class="px-2 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded">
-                                                Edit
-                                            </button>
-                                            {{-- <button
-                                                class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded">Delete
-                                            </button> --}}
-                                            <button onclick="openModal('{{ $item->name }}',{{ $item->id }})"
-                                                class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded">Delete
-                                            </button>
 
+                                            @include('component.tableAction',[
+                                            'route' => 'customer.edit',
+                                            'id' => $item->id,
+                                            'name' => $item->name,
+                                            ])
 
                                         </td>
                                     </tr>
