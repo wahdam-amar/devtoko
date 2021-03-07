@@ -27,7 +27,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create');
     }
 
     /**
@@ -83,6 +83,12 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer = Customer::findOrFail($customer->id);
+
+        $customer->status = 'Na';
+        $customer->save();
+
+
+        return back()->with('message', $customer->name . ' Berhasil di hapus');
     }
 }

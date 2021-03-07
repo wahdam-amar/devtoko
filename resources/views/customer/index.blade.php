@@ -2,7 +2,7 @@
 
 @section('content')
 
-@dump($customer)
+
 
 <div x-data="app()" x-init="[initDate(), getNoOfDays()]" x-cloak>
     <div class="container min-w-full">
@@ -79,7 +79,82 @@
             </div>
         </div>
 
-        @include('component.alert')
+        {{-- table --}}
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-2xl font-medium mb-6">Customers</h2>
+            @include('component.alert')
+            <a href="{{ route('customer.create') }}"
+                class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
+            </a>
+            <div class="mt-6">
+                <div class="flex flex-col">
+                    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
+                        <div
+                            class="mb-10 align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                            <table class="min-w-full">
+                                @include('component.thead',['head'=>[
+                                'Id',
+                                'Name',
+                                'Address',
+                                'Phone',
+                                'City',
+                                'Action',
+                                ]])
+                                <tbody class="bg-white">
+                                    @foreach ($customer as $item)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            {{ $item->id }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            {{ $item->name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            {{ $item->address }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            {{ $item->phone }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            {{ $item->city }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
+                                            <button
+                                                class="px-2 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded">
+                                                Edit
+                                            </button>
+                                            {{-- <button
+                                                class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded">Delete
+                                            </button> --}}
+                                            <form class="inline-block" action="{{ route('customer.destroy',$item->id)}}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onclick="confirm('Hapus {{ $item->name }} ?')"
+                                                    class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded">Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+                        {{ $customer->links() }}
+
+                        {{-- form delete --}}
+                        <form action="{{ route('customer.destroy',1)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 </div>

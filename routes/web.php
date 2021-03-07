@@ -25,4 +25,4 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 
 Route::resource('customer', \App\Http\Controllers\CustomerController::class);
 
-Route::view('/ui', 'ui.index');
+Route::view('/ui', 'ui.index')->name('ui');
