@@ -12,7 +12,7 @@ class SupplierFactory extends Factory
      *
      * @var string
      */
-    protected $model = supplier::class;
+    protected $model = Supplier::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,11 @@ class SupplierFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'address' => $this->faker->address,
+            'city' => $this->faker->city,
+            'name' => $this->faker->name,
+            'phone' => $this->faker->phoneNumber,
+            'status' => 'AC',
         ];
     }
 }
