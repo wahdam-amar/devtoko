@@ -18,10 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/customer', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customer.index');
 
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('customer', \App\Http\Controllers\CustomerController::class);
 
 Route::view('/ui', 'ui.index');
