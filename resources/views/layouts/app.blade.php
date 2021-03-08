@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
+    <title>SysPdp {{ Str::ucfirst(Request::segment(1)) }}</title>
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
