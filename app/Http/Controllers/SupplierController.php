@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\supplier;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -14,7 +14,10 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        $supplier = Supplier::where('status', 'AC')->paginate(15);
+
+
+        return view('supplier.index')->with('supplier', $supplier);
     }
 
     /**
@@ -24,7 +27,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('supplier.create');
     }
 
     /**
@@ -35,7 +38,25 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'address' => 'required',
+            'phone' => 'required|unique:supplier,phone|numeric',
+            'city' => 'required',
+        ]);
+
+        if ($validated) {
+            $supplier = new Supplier;
+            $supplier->name = $request->name;
+            $supplier->address = $request->address;
+            $supplier->phone = $request->phone;
+            $supplier->city = $request->city;
+            $supplier->status = 'AC';
+            $supplier->save();
+            return redirect()->route('supplier.edit', $supplier->id)->with('message', $supplier->name . ' Sukses di buat');
+        }
+
+        return back()->withErrors($validated, 'login');
     }
 
     /**
@@ -46,7 +67,9 @@ class SupplierController extends Controller
      */
     public function show(supplier $supplier)
     {
-        //
+        $supplier = Supplier::findOrFail($supplier->id);
+
+        return view('supplier.edit')->with('supplier', $supplier);
     }
 
     /**
@@ -57,7 +80,9 @@ class SupplierController extends Controller
      */
     public function edit(supplier $supplier)
     {
-        //
+        $supplier = Supplier::findOrFail($supplier->id);
+
+        return view('supplier.edit')->with('supplier', $supplier);
     }
 
     /**
@@ -69,7 +94,24 @@ class SupplierController extends Controller
      */
     public function update(Request $request, supplier $supplier)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'address' => 'required',
+            'phone' => 'required|numeric|unique:supplier,phone,' . $supplier->id,
+            'city' => 'required',
+        ]);
+
+        if ($validated) {
+            $supplier->name = $request->name;
+            $supplier->address = $request->address;
+            $supplier->phone = $request->phone;
+            $supplier->city = $request->city;
+            $supplier->status = 'AC';
+            $supplier->save();
+            return redirect()->route('supplier.edit', $supplier->id)->with('message', $supplier->name . ' Sukses di ubah');
+        }
+
+        return back()->withErrors($validated, 'login');
     }
 
     /**
@@ -80,6 +122,12 @@ class SupplierController extends Controller
      */
     public function destroy(supplier $supplier)
     {
-        //
+        $supplier = Supplier::findOrFail($supplier->id);
+
+        $supplier->status = 'Na';
+        $supplier->save();
+
+
+        return back()->with('message', $supplier->name . ' Berhasil di hapus');
     }
 }

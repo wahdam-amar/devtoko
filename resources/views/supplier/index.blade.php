@@ -5,7 +5,7 @@
 <div class="bg-white p-6 rounded shadow">
     <h2 class="mb-2 text-2xl font-medium">Supplier</h2>
     @include('component.alert')
-    <a href="{{ route('customer.create') }}"
+    <a href="{{ route('supplier.create') }}"
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
     <div class="mt-4">
@@ -23,7 +23,7 @@
                         'Action',
                         ]])
                         <tbody class="bg-white">
-                            @foreach ($customer as $item)
+                            @foreach ($supplier as $item)
                             <tr>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     {{ $item->id }}
@@ -44,7 +44,7 @@
                                     class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
 
                                     @include('component.tableAction',[
-                                    'route' => 'customer.edit',
+                                    'route' => 'supplier.edit',
                                     'id' => $item->id,
                                     'name' => $item->name,
                                     ])
@@ -57,7 +57,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $customer->links() }}
+                {{ $supplier->links() }}
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@
                 <button
                     class="focus:outline-none modal-close px-4 bg-gray-400 p-3 rounded-lg text-black hover:bg-gray-300">Cancel</button>
                 {{-- form delete --}}
-                <form class="form-delete" action="{{ route('customer.destroy',1)}}" method="post">
+                <form class="form-delete" action="{{ route('supplier.destroy',1)}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button class="focus:outline-none px-4 bg-teal-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400"
@@ -123,7 +123,7 @@
     const openModal = (name,id) => {
         console.log(`${name} ${id}`);
         modalBody[0].textContent= `Apa anda ingin menghapus ${name} ?`;
-        formDelete[0].action=`http://localhost:8000/customer/${id}`;
+        formDelete[0].action=`http://localhost:8000/supplier/${id}`;
         modal.classList.remove('fadeOut');
         modal.classList.add('fadeIn');
         modal.style.display = 'flex';

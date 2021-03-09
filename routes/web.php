@@ -24,5 +24,6 @@ Auth::routes();
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('customer', \App\Http\Controllers\CustomerController::class);
+Route::resource('supplier', \App\Http\Controllers\SupplierController::class);
 
 Route::view('/ui', 'ui.index')->name('ui');
