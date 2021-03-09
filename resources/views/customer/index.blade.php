@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="bg-white p-6 rounded shadow">
-    <h2 class="mb-2 text-2xl font-medium">Supplier</h2>
+    <h2 class="mb-2 text-2xl font-medium">Customer</h2>
     @include('component.alert')
     <a href="{{ route('customer.create') }}"
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
