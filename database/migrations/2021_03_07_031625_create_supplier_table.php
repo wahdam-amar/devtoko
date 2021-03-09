@@ -21,6 +21,9 @@ class CreateSupplierTable extends Migration
             $table->string('city');
             $table->string('status');
             $table->timestamps();
+
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

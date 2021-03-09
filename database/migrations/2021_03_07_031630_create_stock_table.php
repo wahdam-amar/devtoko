@@ -25,6 +25,9 @@ class CreateStockTable extends Migration
             $table->string('status');
             $table->index(['category_id', 'status']);
             $table->timestamps();
+
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

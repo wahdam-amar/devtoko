@@ -23,6 +23,9 @@ class CreateCustomerTable extends Migration
             $table->timestamps();
 
             $table->index('phone');
+
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

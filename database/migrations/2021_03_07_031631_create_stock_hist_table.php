@@ -20,6 +20,9 @@ class CreateStockHistTable extends Migration
             $table->bigInteger('price');
             $table->foreign('stock_id')->references('id')->on('stock');
             $table->timestamps();
+
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 
