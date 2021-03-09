@@ -1,4 +1,4 @@
-<aside>
+<aside class="md:min-h-screen">
     <div class="md:flex flex-col md:flex-row md:min-h-full">
         <div @click.away="open = false"
             class="flex flex-col w-full md:w-64 text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 flex-shrink-0"
