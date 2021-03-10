@@ -14,7 +14,10 @@ class EkspedisiController extends Controller
      */
     public function index()
     {
-        //
+        $ekspedisi = Ekspedisi::where('status', 'AC')->paginate(15);
+
+
+        return view('ekspedisi.index')->with('ekspedisi', $ekspedisi);
     }
 
     /**
