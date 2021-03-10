@@ -40,6 +40,7 @@
             <button type="submit"
                 class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">Edit
             </button>
+            @include('component.BackButton')
         </form>
     </div>
 </div>
