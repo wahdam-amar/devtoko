@@ -27,7 +27,7 @@ class EkspedisiController extends Controller
      */
     public function create()
     {
-        //
+        return view('ekspedisi.create');
     }
 
     /**
@@ -38,7 +38,19 @@ class EkspedisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        if ($validated) {
+            $ekspedisi = new Ekspedisi;
+            $ekspedisi->name = $request->name;
+            $ekspedisi->status = 'AC';
+            $ekspedisi->save();
+            return redirect()->route('ekspedisi.edit', $ekspedisi->id)->with('message', $ekspedisi->name . ' Sukses di buat');
+        }
+
+        return back()->withErrors($validated);
     }
 
     /**
@@ -60,7 +72,9 @@ class EkspedisiController extends Controller
      */
     public function edit(Ekspedisi $ekspedisi)
     {
-        //
+        $ekspedisi = Ekspedisi::findOrFail($ekspedisi->id);
+
+        return view('ekspedisi.edit')->with('ekspedisi', $ekspedisi);
     }
 
     /**
@@ -72,7 +86,18 @@ class EkspedisiController extends Controller
      */
     public function update(Request $request, Ekspedisi $ekspedisi)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        if ($validated) {
+            $ekspedisi->name = $request->name;
+            $ekspedisi->status = 'AC';
+            $ekspedisi->save();
+            return redirect()->route('ekspedisi.edit', $ekspedisi->id)->with('message', $ekspedisi->name . ' Sukses di ubah');
+        }
+
+        return back()->withErrors($validated, 'login');
     }
 
     /**
@@ -83,6 +108,12 @@ class EkspedisiController extends Controller
      */
     public function destroy(Ekspedisi $ekspedisi)
     {
-        //
+        $ekspedisi = Ekspedisi::findOrFail($ekspedisi->id);
+
+        $ekspedisi->status = 'Na';
+        $ekspedisi->save();
+
+
+        return back()->with('message', $ekspedisi->name . ' Berhasil di hapus');
     }
 }
