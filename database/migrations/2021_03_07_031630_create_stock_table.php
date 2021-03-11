@@ -19,7 +19,7 @@ class CreateStockTable extends Migration
             $table->string('desc')->nullable();
             $table->bigInteger('amount');
             $table->bigInteger('price_buy');
-            $table->bigInteger('prie_sell');
+            $table->bigInteger('price_sell');
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('stock_category');
             $table->string('status');
