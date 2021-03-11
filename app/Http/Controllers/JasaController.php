@@ -99,7 +99,7 @@ class JasaController extends Controller
             $jasa->price = $request->price;
             $jasa->status = 'AC';
             $jasa->save();
-            return redirect()->route('jasa.edit', $jasa->id)->with('message', $jasa->name . ' Sukses di buat');
+            return redirect()->route('jasa.edit', $jasa->id)->with('message', ucfirst($jasa->name) . ' Sukses di buat');
         }
 
         return back()->withErrors($validated);

@@ -18,4 +18,9 @@ class Jasa extends Model
         'status',
         'price',
     ];
+
+    public function getAmountAttribute()
+    {
+        return  number_format($this->price, 0, ',', '.');
+    }
 }

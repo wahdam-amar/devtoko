@@ -4,6 +4,6 @@
     </button>
 </form>
 
-<button onclick="openModal('{{ $name }}',{{ $id }})"
+<button onclick="openModal('{{ Str::title($name) }}',{{ $id }})"
     class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded">Delete
 </button>
