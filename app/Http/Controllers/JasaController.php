@@ -14,7 +14,9 @@ class JasaController extends Controller
      */
     public function index()
     {
-        //
+        $jasa = Jasa::whereStatus('AC')->paginate(15);
+
+        return view('jasa.index')->with('jasa', $jasa);
     }
 
     /**
@@ -24,7 +26,7 @@ class JasaController extends Controller
      */
     public function create()
     {
-        //
+        return view('jasa.create');
     }
 
     /**
@@ -35,7 +37,21 @@ class JasaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'price' => 'required|numeric',
+        ]);
+
+        if ($validated) {
+            $jasa = new Jasa;
+            $jasa->name = $request->name;
+            $jasa->price = $request->price;
+            $jasa->status = 'AC';
+            $jasa->save();
+            return redirect()->route('jasa.edit', $jasa->id)->with('message', $jasa->name . ' Sukses di buat');
+        }
+
+        return back()->withErrors($validated);
     }
 
     /**
@@ -46,7 +62,9 @@ class JasaController extends Controller
      */
     public function show(Jasa $jasa)
     {
-        //
+        $jasa = Jasa::findOrFail($jasa->id);
+
+        return view('jasa.edit')->with('jasa', $jasa);
     }
 
     /**
@@ -57,7 +75,9 @@ class JasaController extends Controller
      */
     public function edit(Jasa $jasa)
     {
-        //
+        $jasa = Jasa::findOrFail($jasa->id);
+
+        return view('jasa.edit')->with('jasa', $jasa);
     }
 
     /**
@@ -69,7 +89,20 @@ class JasaController extends Controller
      */
     public function update(Request $request, Jasa $jasa)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'price' => 'required|numeric',
+        ]);
+
+        if ($validated) {
+            $jasa->name = $request->name;
+            $jasa->price = $request->price;
+            $jasa->status = 'AC';
+            $jasa->save();
+            return redirect()->route('jasa.edit', $jasa->id)->with('message', $jasa->name . ' Sukses di buat');
+        }
+
+        return back()->withErrors($validated);
     }
 
     /**
@@ -80,6 +113,12 @@ class JasaController extends Controller
      */
     public function destroy(Jasa $jasa)
     {
-        //
+        $jasa = Jasa::findOrFail($jasa->id);
+
+        $jasa->status = 'Na';
+        $jasa->save();
+
+
+        return back()->with('message', $jasa->name . ' Berhasil di hapus');
     }
 }

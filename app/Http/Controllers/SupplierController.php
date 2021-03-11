@@ -111,7 +111,7 @@ class SupplierController extends Controller
             return redirect()->route('supplier.edit', $supplier->id)->with('message', $supplier->name . ' Sukses di ubah');
         }
 
-        return back()->withErrors($validated, 'login');
+        return back()->withErrors($validated);
     }
 
     /**
