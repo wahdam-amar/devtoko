@@ -1,6 +1,6 @@
 @if (Session::has('message'))
 <div x-data="{ show: true }" x-show="show"
-    class="relative flex flex-col sm:flex-row sm:items-center bg-blue-100 shadow rounded-md py-5 pl-6 pr-8 sm:pr-6 md:w-full">
+    class="mb-2 mt-2 relative flex flex-col sm:flex-row sm:items-center bg-blue-100 shadow rounded-md py-5 pl-6 pr-8 sm:pr-6 md:w-full">
     <div class="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
         <div class="text-green-500">
             <svg class="w-6 sm:w-5 h-6 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
