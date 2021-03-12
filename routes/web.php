@@ -32,3 +32,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::view('/ui', 'ui.index')->name('ui');
+
+Route::view('/invoice', 'invoice.index');
