@@ -16,9 +16,11 @@ class CreateStockHistTable extends Migration
         Schema::create('stock_hist', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('stock_id');
+            $table->unsignedInteger('supplier_id');
             $table->bigInteger('amount');
             $table->bigInteger('price');
             $table->foreign('stock_id')->references('id')->on('stock');
+            $table->foreign('supplier_id')->references('id')->on('supplier');
             $table->timestamps();
 
             $table->unsignedBigInteger('created_by')->nullable();
