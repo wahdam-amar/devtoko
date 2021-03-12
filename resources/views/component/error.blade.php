@@ -1,16 +1,25 @@
 @if ($errors->any())
-@foreach ($errors->all() as $error)
-<div x-data="{ errorModal: true }" x-show="errorModal"
-    class="mb-2 mt-2 flex justify-between items-center bg-yellow-200 relative text-yellow-600 py-3 px-3 rounded-lg">
-    <div>
-        <span class="font-semibold text-yellow-700">Error : </span>
-        {{ Str::title($error) }}
-    </div>
-    <div>
-        <button type="button" @click="errorModal = false" class=" text-yellow-700">
-            <span class="text-2xl">&times;</span>
-        </button>
+<div x-data="{ show: true }" x-show="show" class="bg-red-100 border-l-8 border-red-900 mb-2">
+    <div class="flex items-center md:w-full">
+        <div class="p-2">
+            <div class="flex items-center">
+                <div class="ml-2">
+                    <svg @click="show = false" class="h-8 w-8 text-red-900 mr-2 cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <p class="px-6 py-4 text-red-900 font-semibold text-lg">Please fix the
+                    following
+                    errors.</p>
+            </div>
+            <div class="px-16 mb-4">
+                @foreach ($errors->all() as $error)
+                <li class="text-md font-bold text-red-500 text-sm">{{ Str::title($error) }}</li>
+                @endforeach
+            </div>
+        </div>
     </div>
 </div>
-@endforeach
 @endif
