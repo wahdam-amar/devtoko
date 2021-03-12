@@ -14,7 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customer = Customer::where('status', 'AC')->paginate(15);
+        $customer = Customer::whereStatus('AC')->latest()->paginate(15);
 
 
         return view('customer.index')->with('customer', $customer);
@@ -58,7 +58,7 @@ class CustomerController extends Controller
             return redirect()->route('customer.edit', $customer->id)->with('message', $customer->name . ' Sukses di buat');
         }
 
-        return back()->withErrors($validated, 'login');
+        return back()->withErrors($validated);
     }
 
     /**

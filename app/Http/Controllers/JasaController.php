@@ -14,7 +14,7 @@ class JasaController extends Controller
      */
     public function index()
     {
-        $jasa = Jasa::whereStatus('AC')->paginate(15);
+        $jasa = Jasa::whereStatus('AC')->latest()->paginate(15);
 
         return view('jasa.index')->with('jasa', $jasa);
     }

@@ -14,7 +14,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $supplier = Supplier::where('status', 'AC')->paginate(15);
+        $supplier = Supplier::whereStatus('AC')->latest()->paginate(15);
 
 
         return view('supplier.index')->with('supplier', $supplier);
