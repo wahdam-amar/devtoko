@@ -21,9 +21,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::resource('customer', \App\Http\Controllers\CustomerController::class);
     Route::resource('supplier', \App\Http\Controllers\SupplierController::class);
     Route::resource('ekspedisi', \App\Http\Controllers\EkspedisiController::class);
