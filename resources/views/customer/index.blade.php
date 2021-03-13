@@ -29,7 +29,7 @@
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
                 <div
                     class="mb-6 align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-                    <table class="min-w-full">
+                    <table class="table-auto md:w-full">
                         @include('component.thead',['head'=>[
                         'Id',
                         'Name',
