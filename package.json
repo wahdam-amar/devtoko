@@ -18,5 +18,8 @@
         "postcss": "^8.1.14",
         "resolve-url-loader": "^2.3.1",
         "tailwindcss": "^1.8.0"
+    },
+    "dependencies": {
+        "flatpickr": "^4.6.9"
     }
 }
