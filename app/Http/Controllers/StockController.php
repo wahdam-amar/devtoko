@@ -14,7 +14,10 @@ class StockController extends Controller
      */
     public function index()
     {
-        //
+
+        $Stocks = Stock::whereStatus('AC')->latest()->paginate(15);
+
+        return view('stock.index')->with('stocks', $Stocks);
     }
 
     /**
@@ -24,7 +27,7 @@ class StockController extends Controller
      */
     public function create()
     {
-        //
+        return view('stock.create');
     }
 
     /**
@@ -35,7 +38,7 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
