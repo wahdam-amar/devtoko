@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,12 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // 
+        // Made locale to indonesia
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
-
-        Blade::directive('moneyFormat', function ($expression) {
-            return "<?php echo number_format($expression, 0, ',', '.'); ?>";
-        });
     }
 }
