@@ -9,6 +9,22 @@
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
     <div class="mt-4">
+        <div class="relative flex items-center space-x-4 mb-4">
+            <div class="flex flex-col">
+                <div class="relative focus-within:text-gray-600 text-gray-400">
+                    <input type="text"
+                        class="flatpickr flatpickr-input pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="Select Date..">
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <div class="relative focus-within:text-gray-600 text-gray-400">
+                    <input type="text"
+                        class="flatpickr flatpickr-input pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="Select Date..">
+                </div>
+            </div>
+        </div>
         <div class="flex flex-col">
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
                 <div
@@ -61,6 +77,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 {{-- modal --}}
@@ -105,6 +122,14 @@
 @endsection
 
 @push('scripts')
+{{-- for date --}}
+<script>
+    window.onload = function(e){
+        // https://flatpickr.js.org/
+        flatpickr(".flatpickr");
+    }
+</script>
+
 {{-- script for modal --}}
 <script>
     const modal = document.querySelector('.main-modal');
