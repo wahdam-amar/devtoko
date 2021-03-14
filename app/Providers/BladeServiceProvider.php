@@ -25,10 +25,12 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         /**
-         * List custom blade laravel
+         * * 
+         * @param Integer var number
+         * @return String 
          */
-        Blade::directive('moneyFormat', function ($expression) {
-            return "<?php echo number_format($expression, 0, ',', '.'); ?>";
+        Blade::directive('moneyFormat', function ($number) {
+            return "<?php echo number_format($number, 0, ',', '.'); ?>";
         });
     }
 }
