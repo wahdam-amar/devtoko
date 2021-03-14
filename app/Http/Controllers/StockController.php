@@ -50,6 +50,7 @@ class StockController extends Controller
             'price_sell' => 'required|numeric',
             'price_buy' => 'required|numeric',
             'category_id' => 'required|numeric',
+            'amount' => 'required|numeric',
         ]);
 
         if ($validated) {
@@ -59,7 +60,7 @@ class StockController extends Controller
             $stock->price_buy = $request->price_buy;
             $stock->price_sell = $request->price_sell;
             $stock->status = 'AC';
-            $stock->amount = 0;
+            $stock->amount = $request->amount;
             $stock->category_id = $request->category_id;
             $stock->save();
             // return redirect()->route('stock.edit', $stock->id)->with('message', $stock->name . ' Sukses di buat');

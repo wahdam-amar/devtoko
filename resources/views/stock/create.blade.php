@@ -35,7 +35,7 @@
 
             <div class="flex flex-wrap overflow-hidden md:-mx-6">
 
-                <div class="w-full overflow-hidden md:my-6 md:px-6 md:w-1/3">
+                <div class="w-full overflow-hidden md:my-6 md:px-6 md:w-1/4">
                     <label class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold">Kategori</label>
                     <select name="category_id" class=" h-10 mt-2 form-select w-full">
                         @forelse ($category as $item)
@@ -46,7 +46,7 @@
                     </select>
                 </div>
 
-                <div class="w-full overflow-hidden md:my-6 md:px-6 md:w-1/3">
+                <div class="w-full overflow-hidden md:my-6 md:px-6 md:w-1/4">
                     <label class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold">Harga
                         Jual</label>
                     <div class=" my-2 p-1 bg-white flex border border-gray-200 rounded">
@@ -55,11 +55,19 @@
                     </div>
                 </div>
 
-                <div class="w-full overflow-hidden md:my-6 md:px-6 md:w-1/3">
+                <div class="w-full overflow-hidden md:my-6 md:px-6 md:w-1/4">
                     <label class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold">Harga
                         Beli</label>
                     <div class=" my-2 p-1 bg-white flex border border-gray-200 rounded">
                         <input name="price_buy" type="number" placeholder="Harga Beli"
+                            class="p-1 px-2 appearance-none outline-none w-full text-gray-800 ">
+                    </div>
+                </div>
+
+                <div class="w-full overflow-hidden md:my-6 md:px-6 md:w-1/4">
+                    <label class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold">Jumlah</label>
+                    <div class=" my-2 p-1 bg-white flex border border-gray-200 rounded">
+                        <input name="amount" type="number" placeholder="Harga Beli"
                             class="p-1 px-2 appearance-none outline-none w-full text-gray-800 ">
                     </div>
                 </div>

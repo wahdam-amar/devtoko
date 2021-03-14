@@ -15,6 +15,7 @@ class CreateStockHistTable extends Migration
     {
         Schema::create('stock_hist', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('invoice_no', 100);
             $table->unsignedInteger('stock_id');
             $table->unsignedInteger('supplier_id');
             $table->bigInteger('amount');
