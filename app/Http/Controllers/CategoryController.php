@@ -14,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::whereStatus('AC')->latest('id')->paginate(15);
+
+
+        return view('category.index')->with('category', $category);
     }
 
     /**

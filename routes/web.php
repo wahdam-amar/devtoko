@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('ekspedisi', \App\Http\Controllers\EkspedisiController::class);
     Route::resource('jasa', \App\Http\Controllers\JasaController::class);
     Route::resource('stock', \App\Http\Controllers\StockController::class);
+    Route::resource('category', \App\Http\Controllers\CategoryController::class);
 });
 
 Route::view('/ui', 'ui.index')->name('ui');
