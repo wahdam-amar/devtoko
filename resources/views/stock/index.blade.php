@@ -43,11 +43,21 @@
                                 <td
                                     class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
 
+                                    <button
+                                        onclick="location.href='{{ route('stock.transaction', ['stock'=>$item->id]) }}'"
+                                        type="button"
+                                        class="px-2 py-1 bg-purple-500 hover:bg-purple-600 text-white text-sm font-medium rounded">Transaksi
+                                    </button>
+
                                     @include('component.tableAction',[
                                     'route' => 'stock.edit',
                                     'id' => $item->id,
                                     'name' => $item->name,
                                     ])
+
+                                    <button onclick="location.href='{{ route('home') }}'" type="button"
+                                        class="px-2 py-1 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded">History
+                                    </button>
 
                                 </td>
                             </tr>

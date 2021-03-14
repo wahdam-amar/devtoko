@@ -81,6 +81,24 @@ class StockController extends Controller
     }
 
     /**
+     * Transaction the specified resource.
+     *
+     * @param  \App\Models\Stock  $stock
+     * @return \Illuminate\Http\Response
+     */
+    public function transaction(Stock $stock)
+    {
+
+        // $last = $last = DB::table('stock_hist')->latest()->first();
+
+        // dd($last);
+
+        // $invoice = 'INV' . (str_pad((int)$latest->invoice_number + 1, 4, '0', STR_PAD_LEFT));
+
+        return view('stock.transaction');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Stock  $stock
