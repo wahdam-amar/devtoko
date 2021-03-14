@@ -9,6 +9,9 @@
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
     <div class="mt-4">
+
+        @include('component.datePicker')
+
         <div class="flex flex-col">
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
                 <div

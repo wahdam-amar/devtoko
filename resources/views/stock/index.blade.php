@@ -4,10 +4,17 @@
 
 <div class="bg-white p-6 rounded shadow">
     <h2 class="mb-2 text-2xl font-medium">Stock</h2>
-    @include('component.alert')
+
     <a href="{{ route('stock.create') }}"
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
+    <a href="{{ route('stock.transaction') }}"
+        class="mx-2 px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded">Transaksi
+    </a>
+
+    @include('component.alert')
+    @include('component.datePicker')
+
     <div class="mt-4">
         <div class="flex flex-col">
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
@@ -42,12 +49,6 @@
                                 </td>
                                 <td
                                     class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-
-                                    <button
-                                        onclick="location.href='{{ route('stock.transaction', ['stock'=>$item->id]) }}'"
-                                        type="button"
-                                        class="px-2 py-1 bg-purple-500 hover:bg-purple-600 text-white text-sm font-medium rounded">Transaksi
-                                    </button>
 
                                     @include('component.tableAction',[
                                     'route' => 'stock.edit',

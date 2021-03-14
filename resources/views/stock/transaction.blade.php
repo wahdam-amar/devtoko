@@ -59,7 +59,8 @@
                     <div class="flex-1">
                         <input
                             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                            id="inline-full-name" type="text" placeholder="eg. #INV-100001" x-model="invoiceNumber">
+                            id="inline-full-name" type="text" placeholder="INV-000000"
+                            value="{{ $item->invoice->no ?? 'INV-000000' }}" disabled>
                     </div>
                 </div>
 

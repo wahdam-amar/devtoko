@@ -4,27 +4,16 @@
 
 <div class="bg-white p-6 rounded shadow">
     <h2 class="mb-2 text-2xl font-medium">Customer</h2>
-    @include('component.alert')
+
     <a href="{{ route('customer.create') }}"
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
+
+    @include('component.alert')
+    @include('component.datePicker')
+
     <div class="mt-4">
-        <div class="relative flex items-center space-x-4 mb-4">
-            <div class="flex flex-col">
-                <div class="relative focus-within:text-gray-600 text-gray-400">
-                    <input type="text"
-                        class="flatpickr flatpickr-input pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="Select Date..">
-                </div>
-            </div>
-            <div class="flex flex-col">
-                <div class="relative focus-within:text-gray-600 text-gray-400">
-                    <input type="text"
-                        class="flatpickr flatpickr-input pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="Select Date..">
-                </div>
-            </div>
-        </div>
+
         <div class="flex flex-col">
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
                 <div
