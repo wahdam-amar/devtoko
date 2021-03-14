@@ -38,7 +38,28 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'price_sell' => 'required|numeric',
+            'price_buy' => 'required|numeric',
+            'category_id' => 'required|numeric',
+        ]);
+
+        if ($validated) {
+            $stock = new Stock;
+            $stock->name = $request->name;
+            $stock->desc = $request->desc;
+            $stock->price_buy = $request->price_buy;
+            $stock->price_sell = $request->price_sell;
+            $stock->status = 'AC';
+            $stock->amount = 0;
+            $stock->category_id = $request->category_id;
+            $stock->save();
+            // return redirect()->route('stock.edit', $stock->id)->with('message', $stock->name . ' Sukses di buat');
+            return back()->with('message', $stock->name . ' Sukses di buat');
+        }
+
+        return back()->withErrors($validated);
     }
 
     /**
