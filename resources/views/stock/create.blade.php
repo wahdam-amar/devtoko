@@ -38,8 +38,11 @@
                 <div class="w-full overflow-hidden md:my-6 md:px-6 md:w-1/3">
                     <label class="block uppercase tracking-wide text-charcoal-darker text-xs font-bold">Kategori</label>
                     <select name="category_id" class=" h-10 mt-2 form-select w-full">
-                        <option value="1">US</option>
-                        <option value="2">Italy</option>
+                        @forelse ($category as $item)
+                        <option value="{{ $item->id }}">{{ Str::title($item->name) }}</option>
+                        @empty
+                        <option value="1">Belum Ada Katagori</option>
+                        @endforelse
                     </select>
                 </div>
 

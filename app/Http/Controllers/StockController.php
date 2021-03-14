@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,9 @@ class StockController extends Controller
      */
     public function create()
     {
-        return view('stock.create');
+        $category = Category::whereStatus('AC')->get();
+
+        return view('stock.create')->with('category', $category);
     }
 
     /**
