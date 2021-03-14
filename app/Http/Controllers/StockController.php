@@ -106,7 +106,9 @@ class StockController extends Controller
      */
     public function edit(Stock $stock)
     {
-        //
+        $category = Category::whereStatus('AC')->get();
+
+        return view('stock.edit')->with('stock', $stock)->with('category', $category);
     }
 
     /**
@@ -118,7 +120,25 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'price_sell' => 'required|numeric',
+            'price_buy' => 'required|numeric',
+            'category_id' => 'required|numeric',
+        ]);
+
+        if ($validated) {
+            $stock->name = $request->name;
+            $stock->desc = $request->desc;
+            $stock->price_buy = $request->price_buy;
+            $stock->price_sell = $request->price_sell;
+            $stock->category_id = $request->category_id;
+            $stock->save();
+            // return redirect()->route('stock.edit', $stock->id)->with('message', $stock->name . ' Sukses di buat');
+            return back()->with('message', $stock->name . ' Sukses di ubah');
+        }
+
+        return back()->withErrors($validated);
     }
 
     /**
