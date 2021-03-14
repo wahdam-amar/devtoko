@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
+
 class StockController extends Controller
 {
     /**
@@ -15,8 +16,11 @@ class StockController extends Controller
     public function index()
     {
 
-        $Stocks = Stock::whereStatus('AC')->latest()->paginate(15);
+        // \Illuminate\Support\Facades\DB::enableQueryLog();
 
+        $Stocks = Stock::with('category')->whereStatus('AC')->latest('id')->paginate(15);
+
+        // dd(\Illuminate\Support\Facades\DB::getQueryLog());
         return view('stock.index')->with('stocks', $Stocks);
     }
 

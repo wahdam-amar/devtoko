@@ -15,7 +15,7 @@ class CreateStockCategoryTable extends Migration
     {
         Schema::create('stock_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('status');
             $table->timestamps();
 

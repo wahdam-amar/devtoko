@@ -18,6 +18,7 @@
                         'Id',
                         'Name',
                         'Keterangan',
+                        'Kategori',
                         'Jumlah',
                         'Action'
                         ]])
@@ -29,6 +30,12 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     {{ Str::of($item->name)->title() }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    {{ Str::of($item->desc)->title() }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    {{ Str::of($item->category->name)->title() }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     {{ $item->amount }}

@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -38,7 +38,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:stock_category,name'
+        ]);
+
+        if (!$validated) {
+            return back()->withErrors($validated);
+        }
+
+        $category = new Category;
+        $category->name = $request->name;
+        $category->status = 'AC';
+        $category->save();
+
+        return back()->with('message', $category->name . ' Sukses di buat');
     }
 
     /**
@@ -60,7 +73,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit')->with('category', $category);
     }
 
     /**
@@ -72,7 +85,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:stock_category,name,' . $category->id
+        ]);
+
+        if (!$validated) {
+            return back()->withErrors($validated);
+        }
+
+        $category->name = $request->name;
+        $category->save();
+
+        return back()->with('message', $category->name . ' Berhasil di ubah');
     }
 
     /**
@@ -83,6 +107,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+
+        $category->status = 'NA';
+        $category->save();
+
+
+        return back()->with('message', $category->name . ' Berhasil di hapus');
     }
 }

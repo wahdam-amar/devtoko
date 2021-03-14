@@ -21,4 +21,9 @@ class Stock extends Model
         'category_id',
         'status',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

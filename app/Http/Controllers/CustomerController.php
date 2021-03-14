@@ -80,7 +80,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $customer = Customer::findOrFail($customer->id);
+        $customer = Customer::firstOrFail($customer->id);
 
         return view('customer.edit')->with('customer', $customer);
     }
@@ -122,7 +122,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer = Customer::findOrFail($customer->id);
+        $customer = Customer::firstOrFail($customer->id);
 
         $customer->status = 'Na';
         $customer->save();
