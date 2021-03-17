@@ -25,7 +25,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    /**
+     * Customer
+     */
     Route::resource('customer', \App\Http\Controllers\CustomerController::class);
+    Route::get('/json/customer', [\App\Http\Controllers\CustomerController::class, 'indexJson'])->name('customer.json');
+
     Route::resource('supplier', \App\Http\Controllers\SupplierController::class);
     Route::resource('ekspedisi', \App\Http\Controllers\EkspedisiController::class);
     Route::resource('jasa', \App\Http\Controllers\JasaController::class);

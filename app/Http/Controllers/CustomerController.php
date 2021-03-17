@@ -12,6 +12,22 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function indexJson(Request $request)
+    {
+
+        $customer = Customer::whereStatus('AC')
+            ->where("name", "LIKE", "%{$request->input('query')}%")->latest()->limit(5)->get();
+
+        return response()->json(
+            $customer,
+        );
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $customer = Customer::whereStatus('AC')->latest()->paginate(15);

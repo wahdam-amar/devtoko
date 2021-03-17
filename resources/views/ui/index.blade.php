@@ -173,7 +173,7 @@
             <label class="block">
                 <span class="text-gray-700">Name</span>
                 <input
-                    class="form-input bg-gray-200 border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full"
+                    class="name-input form-input bg-gray-200 border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full"
                     type="text">
             </label>
             <label class="block">
@@ -228,3 +228,55 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    class Ajax {
+
+query = 'query';
+
+constructor(url, element) {
+    this.url = url;
+    this.element = element;
+}
+
+appendQuery(queryValue) {
+    this.url += `?${this.query}=${queryValue}`
+    console.log(`url : ${this.url}`);
+    return this;
+}
+
+async fetch(id) {
+    try {
+        const response = await fetch(`${this.url}`, {
+            method: 'GET',
+            credentials: 'same-origin'
+        });
+        const exam = await response.json();
+        return exam;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async render() {
+    const result = await this.fetch();
+    console.log(result);
+}
+
+}
+
+    Ajax = new Ajax(`{{ route('customer.json') }}`);
+    const input = document.querySelector('.name-input');
+
+    input.oninput = function() {
+    Ajax.appendQuery(input.value);
+    };
+
+    Ajax.fetch();
+    // Ajax.render();
+
+
+
+</script>
+@endpush

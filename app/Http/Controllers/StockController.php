@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Stock;
 use Illuminate\Http\Request;
-
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class StockController extends Controller
 {
@@ -90,11 +91,20 @@ class StockController extends Controller
     public function transaction(Stock $stock)
     {
 
-        // $last = $last = DB::table('stock_hist')->latest()->first();
+        $id = IdGenerator::generate([
+            'table' => 'stock_hist',
+            'field' => 'invoice_no',
+            'length' => 10,
+            'prefix' => 'INV-'
+        ]);
 
-        // dd($last);
 
-        // $invoice = 'INV' . (str_pad((int)$latest->invoice_number + 1, 4, '0', STR_PAD_LEFT));
+        return view('stock.transaction')->with('id', $id);
+    }
+
+    public function saveTransaction(Request $request)
+    {
+        dd($request);
 
         return view('stock.transaction');
     }

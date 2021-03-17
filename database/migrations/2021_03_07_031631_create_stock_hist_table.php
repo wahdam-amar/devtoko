@@ -14,8 +14,10 @@ class CreateStockHistTable extends Migration
     public function up()
     {
         Schema::create('stock_hist', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
             $table->string('invoice_no', 100);
+            $table->dateTime('invoice_date')->nullable()->default(now());
+            $table->dateTime('invoice_due')->nullable()->default(now());
             $table->unsignedInteger('stock_id');
             $table->unsignedInteger('supplier_id');
             $table->bigInteger('amount');
