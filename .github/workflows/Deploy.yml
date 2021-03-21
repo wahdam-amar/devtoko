@@ -1,5 +1,5 @@
 on: push
-name: 🚀 Deploy website on push
+name: DevToko
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -7,12 +7,12 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2.3.2
-       
+    
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
         server: ftpupload.net
         username: epiz_28175281
-        password: ${{ secrets.FTP_PASSWORD }}
-        protocol: ftp
-        port: 21 # todo replace with your web hosts ftps port
+        password: ${{ secrets.ftp_password }}
+        port: 21
+        server-dir: htdocs/
