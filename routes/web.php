@@ -42,3 +42,7 @@ Route::middleware(['auth'])->group(function () {
 Route::view('/ui', 'ui.index')->name('ui');
 
 Route::view('/invoice', 'invoice.index');
+
+Route::get('/custom', function () {
+    dd(formatMoney('10000'));
+});
