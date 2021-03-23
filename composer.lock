@@ -894,16 +894,16 @@
         },
         {
             "name": "haruncpi/laravel-id-generator",
-            "version": "v1.0.6",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haruncpi/laravel-id-generator.git",
-                "reference": "1dc9212781f811205e8e54f663e4c533ae306eaf"
+                "reference": "9e5f59ec2e670afd970d0ab6eb7c20d026705c6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haruncpi/laravel-id-generator/zipball/1dc9212781f811205e8e54f663e4c533ae306eaf",
-                "reference": "1dc9212781f811205e8e54f663e4c533ae306eaf",
+                "url": "https://api.github.com/repos/haruncpi/laravel-id-generator/zipball/9e5f59ec2e670afd970d0ab6eb7c20d026705c6d",
+                "reference": "9e5f59ec2e670afd970d0ab6eb7c20d026705c6d",
                 "shasum": ""
             },
             "require": {
@@ -935,9 +935,9 @@
             "description": "Easy way to generate custom ID in laravel framework",
             "support": {
                 "issues": "https://github.com/haruncpi/laravel-id-generator/issues",
-                "source": "https://github.com/haruncpi/laravel-id-generator/tree/v1.0.6"
+                "source": "https://github.com/haruncpi/laravel-id-generator/tree/v1.0.7"
             },
-            "time": "2021-03-05T04:25:55+00:00"
+            "time": "2021-03-17T15:32:02+00:00"
         },
         {
             "name": "laravel/framework",

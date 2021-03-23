@@ -44,5 +44,8 @@ Route::view('/ui', 'ui.index')->name('ui');
 Route::view('/invoice', 'invoice.index');
 
 Route::get('/custom', function () {
-    dd(formatMoney('10000'));
-});
+    dd(getCategory());
+
+   //  Artisan::call('migrate:fresh --seed');
+   // return Artisan::output();
+})->name('custom');
