@@ -101,6 +101,8 @@ class StockController extends Controller
     public function saveTransaction(Request $request)
     {
 
+        dd($request->all());
+
         $invoice = new Invoice();
         $invoice->no = $request->name;
         $invoice->date = $request->date;
@@ -108,7 +110,7 @@ class StockController extends Controller
         $invoice->amount = $request->amount ?? 100;
         $invoice->save();
 
-        return view('stock.transaction');
+        return back()->with('message', $invoice->no . ' Sukses di buat');
     }
 
     /**

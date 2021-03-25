@@ -15,8 +15,9 @@ class CreateInvoiceTable extends Migration
     {
         Schema::create('invoice', function (Blueprint $table) {
             $table->string('no', 100);
-            $table->dateTime('date')->nullable()->default(now());
-            $table->dateTime('due')->nullable()->default(now());
+            $table->date('date')->nullable()->default(now());
+            $table->date('due')->nullable()->default(now());
+            $table->string('status', 3)->default('AC');
             // $table->unsignedInteger('supplier_id');
             $table->bigInteger('amount');
             // $table->foreign('supplier_id')->references('id')->on('supplier');

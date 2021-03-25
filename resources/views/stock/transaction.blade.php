@@ -7,6 +7,7 @@
 
 
     <div class="border-t-8 border-gray-700 h-2"></div>
+    @include('component.alert')
     <div class="container mx-auto py-6 px-4" x-data="invoices()" x-init="generateInvoiceNumber(111111, 999999);"
         x-cloak>
         <form method="post" action="{{ route('stock.save') }}">
@@ -133,16 +134,43 @@
                 <div class="w-full md:w-1/3 mb-2 md:mb-0">
                     <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Bill/Ship
                         To:</label>
-                    <input name="bill"
+                    <input type="search" autocomplete="off"
                         class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                        id="inline-full-name" type="text" placeholder="Billing company name" x-model="billing.name">
+                        id="inline-full-name" type="text" placeholder="Billing company name"
+                        x-on:input.debounce="getCustomer()" x-model="billing.name" @click.away="open=false">
+
+                    <input class="hidden" type="text" name="id" x-model="billing.id" type="hidden">
+
+                    <div x-show="open" class="absolute shadow top-100 z-40 lef-0 rounded overflow-y-auto svelte-5uyqqj">
+                        <div class="flex flex-col">
+                            <template x-for="customer in customers">
+                                <div class="cursor-pointer w-auto border-gray-100 rounded-t border-b 
+                                hover:bg-teal-100" style="">
+                                    <div
+                                        class="flex items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:text-teal-100 hover:border-teal-600">
+                                        <div class="items-center flex">
+                                            <span @click="
+                                            billing.name=customer.name;
+                                            billing.id=customer.id;
+                                            billing.address=customer.address;
+                                            billing.extra=customer.phone" class="mx-2 leading-6"
+                                                x-text="customer.name"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+
                     <input
                         class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                         id="inline-full-name" type="text" placeholder="Billing company address"
-                        x-model="billing.address">
+                        x-model="billing.address" readonly>
                     <input
                         class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                        id="inline-full-name" type="text" placeholder="Additional info" x-model="billing.extra">
+                        id="inline-full-name" type="text" placeholder="Additional info" x-model="billing.extra"
+                        readonly>
                 </div>
                 <div class="w-full md:w-1/3">
                     <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">From:</label>
@@ -213,7 +241,7 @@
 
             <button
                 class="mt-6 bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 text-sm border border-gray-300 rounded shadow-sm"
-                x-on:click="openModal = !openModal">
+                x-on:click.prevent="openModal = !openModal">
                 Add Invoice Items
             </button>
             <button
@@ -733,6 +761,8 @@
     function invoices() {
         return {
             items: [],
+            customers:[],
+            open: false,
             invoiceNumber: 0,
             invoiceDate: '',
             invoiceDueDate: '',
@@ -750,6 +780,7 @@
             },
 
             billing: {
+                id:'',
                 name: '',
                 address: '',
                 extra: ''
@@ -763,6 +794,14 @@
             showTooltip: false,
             showTooltip2: false,
             openModal: false,
+
+            getCustomer(){
+                fetch(`http://localhost:8000/json/customer?query=${this.billing.name}`)
+                      .then(response => response.json())
+                      .then(data => this.customers = data);
+                console.log(this.customers);
+                this.open=true;
+            },
 
             addItem() {
                 this.items.push({
