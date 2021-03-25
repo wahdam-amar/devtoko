@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Invoice;
 use App\Models\Stock;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -91,20 +93,20 @@ class StockController extends Controller
     public function transaction(Stock $stock)
     {
 
-        $id = IdGenerator::generate([
-            'table' => 'stock_hist',
-            'field' => 'invoice_no',
-            'length' => 10,
-            'prefix' => 'INV-'
-        ]);
+        $invoiceNumber = IdGenerator::generate(['table' => 'invoice', 'field' => 'no', 'length' => 10, 'prefix' => 'INV-' . date('ym')]);
 
-
-        return view('stock.transaction')->with('id', $id);
+        return view('stock.transaction')->with('invoiceNumber', $invoiceNumber);
     }
 
     public function saveTransaction(Request $request)
     {
-        dd($request);
+
+        $invoice = new Invoice();
+        $invoice->no = $request->name;
+        $invoice->date = $request->date;
+        $invoice->due = $request->duedate;
+        $invoice->amount = $request->amount ?? 100;
+        $invoice->save();
 
         return view('stock.transaction');
     }

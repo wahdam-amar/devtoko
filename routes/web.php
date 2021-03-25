@@ -35,7 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('ekspedisi', \App\Http\Controllers\EkspedisiController::class);
     Route::resource('jasa', \App\Http\Controllers\JasaController::class);
     Route::resource('stock', \App\Http\Controllers\StockController::class);
-    Route::get('transaction/', [\App\Http\Controllers\StockController::class, 'transaction'])->name('stock.transaction');
+    Route::get('transaction', [\App\Http\Controllers\StockController::class, 'transaction'])->name('stock.transaction');
+    Route::post('transaction', [\App\Http\Controllers\StockController::class, 'saveTransaction'])->name('stock.save');
     Route::resource('category', \App\Http\Controllers\CategoryController::class);
 });
 
@@ -46,6 +47,6 @@ Route::view('/invoice', 'invoice.index');
 Route::get('/custom', function () {
     dd(getCategory());
 
-   //  Artisan::call('migrate:fresh --seed');
-   // return Artisan::output();
+    //  Artisan::call('migrate:fresh --seed');
+    // return Artisan::output();
 })->name('custom');
