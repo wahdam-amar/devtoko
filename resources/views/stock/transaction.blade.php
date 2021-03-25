@@ -139,7 +139,7 @@
                         id="inline-full-name" type="text" placeholder="Billing company name"
                         x-on:input.debounce="getCustomer()" x-model="billing.name" @click.away="open=false">
 
-                    <input class="hidden" type="text" name="id" x-model="billing.id" type="hidden">
+                    <input class="hidden" type="text" name="customer" x-model="billing.id" type="hidden">
 
                     <div x-show="open" class="absolute shadow top-100 z-40 lef-0 rounded overflow-y-auto svelte-5uyqqj">
                         <div class="flex flex-col">

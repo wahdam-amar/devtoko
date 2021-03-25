@@ -101,12 +101,11 @@ class StockController extends Controller
     public function saveTransaction(Request $request)
     {
 
-        dd($request->all());
-
         $invoice = new Invoice();
         $invoice->no = $request->name;
         $invoice->date = $request->date;
         $invoice->due = $request->duedate;
+        $invoice->customer_id = $request->customer;
         $invoice->amount = $request->amount ?? 100;
         $invoice->save();
 

@@ -13,6 +13,10 @@ class Invoice extends Model
 
     protected $table = 'invoice';
 
+    protected $primaryKey = 'no ';
+
+    protected $keyType = 'string';
+
     protected $fillable = [
         'no',
         'date',
