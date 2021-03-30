@@ -176,15 +176,18 @@
                     <label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">From:</label>
                     <input
                         class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                        id="inline-full-name" type="text" placeholder="Your company name" x-model="from.name">
+                        id="inline-full-name" type="text" placeholder="{{ $company->name }}"
+                        value="{{ $company->name }}" x-model="from.name">
 
                     <input
                         class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                        id="inline-full-name" type="text" placeholder="Your company address" x-model="from.address">
+                        id="inline-full-name" type="text" placeholder="{{ $company->address }}"
+                        value="{{ $company->address }}" x-model="from.address">
 
                     <input
                         class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                        id="inline-full-name" type="text" placeholder="Additional info" x-model="from.extra">
+                        id="inline-full-name" type="text" placeholder="{{ $company->description }}"
+                        value="{{ $company->description }}" x-model="from.extra">
                 </div>
             </div>
 
@@ -255,12 +258,12 @@
                         <div class="text-gray-800 font-medium" x-html="netTotal"></div>
                     </div>
                 </div>
-                <div class="flex justify-between mb-4">
+                {{-- <div class="flex justify-between mb-4">
                     <div class="text-sm text-gray-600 text-right flex-1">GST(18%) incl. in Total</div>
                     <div class="text-right w-40">
                         <div class="text-sm text-gray-600" x-html="totalGST"></div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="py-2 border-t border-b">
                     <div class="flex justify-between">
@@ -272,7 +275,7 @@
                 </div>
             </div>
 
-            <div class="py-10 text-center">
+            {{-- <div class="py-10 text-center">
                 <p class="text-gray-600">Created by <a
                         class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300"
                         href="https://twitter.com/mithicher">@mithicher</a>. Built with <a
@@ -282,7 +285,7 @@
                     SVG icons from <a href="https://github.com/tabler/tabler-icons"
                         class="text-blue-600 hover:text-blue-500 border-b-2 border-blue-200 hover:border-blue-300">Tabler
                         Icons</a>.</p>
-            </div>
+            </div> --}}
 
             <!-- Print Template -->
             <div id="js-print-template" x-ref="printTemplate" class="hidden">
@@ -429,7 +432,23 @@
                                 class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Description</label>
                             <input
                                 class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                id="inline-full-name" type="text" x-model="item.name">
+                                id="inline-full-name" type="text" x-model="item.name" x-on:input.debounce="getStock()">
+                            <div x-show="stockModal" @click.away="stockModal=false;stocks=null"
+                                class="absolute shadow top-100 z-40 lef-0 rounded overflow-y-auto svelte-5uyqqj">
+                                <div class="flex flex-col">
+                                    <template x-for="stock in stocks">
+                                        <div class="cursor-pointer w-auto border-gray-100 rounded-t border-b 
+                                            hover:bg-teal-100" style="">
+                                            <div
+                                                class="flex items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:text-teal-100 hover:border-teal-600">
+                                                <div class="items-center flex">
+                                                    <span class="mx-2 leading-6" x-text="stock.name"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="flex">
@@ -458,7 +477,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 w-32">
+                        {{-- <div class="mb-4 w-32">
                             <div class="relative">
                                 <label
                                     class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">GST</label>
@@ -479,7 +498,7 @@
                                     </svg>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="mt-8 text-right">
                             <button type="button"
@@ -762,6 +781,8 @@
         return {
             items: [],
             customers:[],
+            stocks:[],
+            stockModal:false,
             open: false,
             invoiceNumber: 0,
             invoiceDate: '',
@@ -786,9 +807,9 @@
                 extra: ''
             },
             from: {
-                name: '',
-                address: '',
-                extra: ''
+                name: '{{ $company->name }}',
+                address: '{{ $company->address }}',
+                extra: '{{ $company->description }}'
             },
 
             showTooltip: false,
@@ -799,8 +820,16 @@
                 fetch(`http://localhost:8000/json/customer?query=${this.billing.name}`)
                       .then(response => response.json())
                       .then(data => this.customers = data);
-                console.log(this.customers);
+                      console.log(this.customers);
                 this.open=true;
+            },
+
+            getStock(){
+                fetch(`http://localhost:8000/json/stock?search=${this.item.name}`)
+                      .then(response => response.json())
+                      .then(data => this.stocks = data);
+                      console.log(`http://localhost:8000/json/stock?search=${this.item.name}`);
+                this.stockModal=true;
             },
 
             addItem() {

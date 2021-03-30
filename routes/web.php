@@ -34,7 +34,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('supplier', \App\Http\Controllers\SupplierController::class);
     Route::resource('ekspedisi', \App\Http\Controllers\EkspedisiController::class);
     Route::resource('jasa', \App\Http\Controllers\JasaController::class);
+
+    /**
+     * Stock
+     */
     Route::resource('stock', \App\Http\Controllers\StockController::class);
+    Route::get('/json/stock', [\App\Http\Controllers\StockController::class, 'indexJson'])->name('stock.json');
+
     Route::get('transaction', [\App\Http\Controllers\StockController::class, 'transaction'])->name('stock.transaction');
     Route::post('transaction', [\App\Http\Controllers\StockController::class, 'saveTransaction'])->name('stock.save');
     Route::resource('category', \App\Http\Controllers\CategoryController::class);

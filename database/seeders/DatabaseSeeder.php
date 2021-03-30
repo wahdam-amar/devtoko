@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Ekspedisi::factory(3)->create();
         \App\Models\Jasa::factory(3)->create();
         \App\Models\Category::factory(3)->create();
+        \App\Models\Company::factory(1)->create();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Stock;
@@ -12,6 +13,18 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class StockController extends Controller
 {
+
+    public function indexJson(Request $request)
+    {
+
+        $customer = Stock::whereStatus('AC')
+            ->where("name", "LIKE", "%{$request->input('search')}%")->latest()->limit(5)->get();
+
+        return response()->json(
+            $customer,
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -93,9 +106,11 @@ class StockController extends Controller
     public function transaction(Stock $stock)
     {
 
-        $invoiceNumber = IdGenerator::generate(['table' => 'invoice', 'field' => 'no', 'length' => 10, 'prefix' => 'INV-' . date('ym')]);
+        $company = Company::find(1)->first();
 
-        return view('stock.transaction')->with('invoiceNumber', $invoiceNumber);
+        // dd($company);
+
+        return view('stock.transaction')->with('company', $company);
     }
 
     public function saveTransaction(Request $request)
@@ -148,7 +163,6 @@ class StockController extends Controller
             $stock->price_sell = $request->price_sell;
             $stock->category_id = $request->category_id;
             $stock->save();
-            // return redirect()->route('stock.edit', $stock->id)->with('message', $stock->name . ' Sukses di buat');
             return back()->with('message', $stock->name . ' Sukses di ubah');
         }
 
