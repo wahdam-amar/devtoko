@@ -429,25 +429,7 @@
                         <div class="mb-4">
                             <label
                                 class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Description</label>
-                            <input
-                                class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                id="inline-full-name" type="text" x-model="item.name" x-on:input.debounce="getStock()">
-                            <div x-show="stockModal" @click.away="stockModal=false;stocks=null"
-                                class="absolute shadow top-100 z-40 lef-0 rounded overflow-y-auto svelte-5uyqqj">
-                                <div class="flex flex-col">
-                                    <template x-for="stock in stocks">
-                                        <div class="cursor-pointer w-auto border-gray-100 rounded-t border-b 
-                                            hover:bg-teal-100" style="">
-                                            <div
-                                                class="flex items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:text-teal-100 hover:border-teal-600">
-                                                <div class="items-center flex">
-                                                    <span class="mx-2 leading-6" x-text="stock.name"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
+                            <x-forms.input name="id" url="{{ route('customer.json') }}?query" />
                         </div>
 
                         <div class="flex">

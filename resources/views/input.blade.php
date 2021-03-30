@@ -8,11 +8,11 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <label class="block">
                 <span class="text-gray-700">Name</span>
+
                 <div x-data="autocomplete('http://localhost:8000/json/customer?query')">
                     <input class=" name-input form-input bg-gray-200 border-gray-300 focus:border-indigo-400
                         focus:shadow-none focus:bg-white mt-1 block w-full" type="text" x-model="inputValue"
                         x-on:input.debounce.750="fetchData()">
-
                     {{-- Loop the data --}}
                     <div x-show="listData"
                         class="absolute shadow top-100 z-40 lef-0 rounded overflow-y-auto svelte-5uyqqj">
@@ -30,8 +30,9 @@
                             </template>
                         </div>
                     </div>
-
+                    {{-- End loop data --}}
                 </div>
+
             </label>
             <label class="block">
                 <span class="text-gray-700">Email address</span>
@@ -68,9 +69,7 @@
             </label>
             <label class="block">
                 <span class="text-gray-700">Email address</span>
-                <input
-                    class="form-input bg-gray-200 border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full"
-                    type="text">
+                <x-forms.input name="id" />
             </label>
         </div>
     </div>
