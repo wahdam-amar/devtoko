@@ -3,7 +3,6 @@
 @section('content')
 <!-- component -->
 <div class="antialiased sans-serif min-h-screen bg-white" style="min-height: 900px">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
 
     <div class="border-t-8 border-gray-700 h-2"></div>
@@ -139,7 +138,7 @@
                         id="inline-full-name" type="text" placeholder="Billing company name"
                         x-on:input.debounce="getCustomer()" x-model="billing.name" @click.away="open=false">
 
-                    <input class="hidden" type="text" name="customer" x-model="billing.id" type="hidden">
+                    <input class="hidden" type="text" name="customer" x-model="billing.id" type="hidden" value="init">
 
                     <div x-show="open" class="absolute shadow top-100 z-40 lef-0 rounded overflow-y-auto svelte-5uyqqj">
                         <div class="flex flex-col">

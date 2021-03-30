@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,10 @@ Route::get('/custom', function () {
     //  Artisan::call('migrate:fresh --seed');
     // return Artisan::output();
 })->name('custom');
+
+
+/**
+ * Test 
+ */
+
+Route::view('/test', 'input');
