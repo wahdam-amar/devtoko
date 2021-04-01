@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Stock;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $totalCustomers = Customer::whereStatus('AC')->count();
+        $totalStocks = Stock::whereStatus('AC')->count();
+        $totalSuppliers = Supplier::whereStatus('AC')->count();
+
+        return view('home')
+            ->with('customer', $totalCustomers)
+            ->with('supplier', $totalSuppliers)
+            ->with('stock', $totalStocks);
     }
 }

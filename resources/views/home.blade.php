@@ -12,10 +12,10 @@
                         <div class="flex flex-wrap">
                             <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                                 <h5 class="text-gray-500 uppercase font-bold text-xs">
-                                    New users
+                                    Customers
                                 </h5>
                                 <span class="font-semibold text-xl text-gray-800">
-                                    2,356
+                                    {{ $customer }}
                                 </span>
                             </div>
                             <div class="relative w-auto px-2 flex-initial">
@@ -47,10 +47,10 @@
                         <div class="flex flex-wrap">
                             <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                                 <h5 class="text-gray-500 uppercase font-bold text-xs">
-                                    Sales
+                                    Stocks
                                 </h5>
                                 <span class="font-semibold text-xl text-gray-800">
-                                    924
+                                    {{ $stock }}
                                 </span>
                             </div>
                             <div class="relative w-auto px-2 flex-initial">
@@ -82,10 +82,10 @@
                         <div class="flex flex-wrap">
                             <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                                 <h5 class="text-gray-500 uppercase font-bold text-xs">
-                                    Performance
+                                    Suppliers
                                 </h5>
                                 <span class="font-semibold text-xl text-gray-800">
-                                    49,65%
+                                    {{ $supplier }}
                                 </span>
                             </div>
                             <div class="relative w-auto px-2 flex-initial">

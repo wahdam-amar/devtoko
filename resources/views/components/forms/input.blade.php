@@ -22,3 +22,38 @@
     </div>
     {{-- End loop data --}}
 </div>
+
+@once
+@push('scripts')
+<script>
+    function autocomplete(url) {
+            return {
+                storedData:[],
+                listData:false,
+                inputValue:null,
+                dataId:null,
+                log(){
+                    console.log(this.inputValue)
+                },
+                init(){
+                  console.log();  
+                },
+                dissmissModal(){
+                    this.listData=false;
+                },
+                returnData(id,name){
+                    this.inputValue=name;
+                    this.dataId=id;
+                },
+                fetchData(){
+                    fetch(`${url}=${this.inputValue}`)
+                          .then(response => response.json())
+                          .then(data => this.storedData = data);
+                        //   console.log(this.storedData);
+                          this.listData=true;
+                },
+            }
+        }
+</script>
+@endpush
+@endonce
