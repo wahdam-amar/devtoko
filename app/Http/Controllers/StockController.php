@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use App\Models\Stock;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -115,25 +116,28 @@ class StockController extends Controller
     {
 
         //Parse array dari input
-        $stocks = json_decode($request->name, true);
-
-
-        // loop lalu insert ke hoist
-        foreach ($stocks as $stock) {
-            var_dump($stock['id']);
-        }
-
-        return;
+        $stocks = json_decode($request->details, true);
+        // dd($request->all());
 
 
         // Buar headernya
         $invoice = new Invoice();
-        $invoice->no = $request->name;
+        // $invoice->no = $request->header;
         $invoice->date = $request->date;
         $invoice->due = $request->duedate;
         $invoice->customer_id = $request->customer;
         $invoice->amount = $request->amount ?? 100;
         $invoice->save();
+
+        // loop lalu insert ke detail
+        foreach ($stocks as $stock) {
+            $detail = new InvoiceDetail();
+            $detail->invoice_no = $invoice->no;
+            $detail->stock_id = $stock['id'];
+            $detail->quantity = $stock['qty'];
+            $detail->save();
+            // var_dump($stock['id']);
+        }
 
         return back()->with('message', $invoice->no . ' Sukses di buat');
     }

@@ -364,7 +364,7 @@
                         </p>
                     </div>
                 </div>
-                <input class="hidden" :value="JSON.stringify(items)" name="name" type="text">
+                <input class="hidden" :value="JSON.stringify(items)" name="details" type="text">
                 <template x-for="invoice in items" :key="invoice.id">
                     <div class="flex flex-wrap -mx-1 py-2 border-b">
                         <div class="flex-1 px-1">
@@ -430,10 +430,10 @@
                         <div class="mb-4">
                             <label
                                 class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Description</label>
-                            <div x-data="autocomplete('{{ route('customer.json') }}?query')">
+                            <div x-data="autocomplete('{{ route('stock.json') }}?query')">
                                 <input id="getName" class="name-input form-input bg-gray-200 border-gray-300 focus:border-indigo-400
                                         focus:shadow-none focus:bg-white mt-1 block w-full" type="text"
-                                    x-model="inputValue" x-on:input.debounce.750="fetchData()">
+                                    x-model="inputValue" x-on:input.debounce.750="fetchData()" autocomplete="off">
                                 <input id="getId" class="hidden" type="text" :value="dataId" x-model="dataId"
                                     type="hidden">
                                 {{-- Loop the data --}}
