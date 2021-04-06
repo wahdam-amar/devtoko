@@ -108,14 +108,25 @@ class StockController extends Controller
 
         $company = Company::find(1)->first();
 
-        // dd($company);
-
         return view('stock.transaction')->with('company', $company);
     }
 
     public function saveTransaction(Request $request)
     {
 
+        //Parse array dari input
+        $stocks = json_decode($request->name, true);
+
+
+        // loop lalu insert ke hoist
+        foreach ($stocks as $stock) {
+            var_dump($stock['id']);
+        }
+
+        return;
+
+
+        // Buar headernya
         $invoice = new Invoice();
         $invoice->no = $request->name;
         $invoice->date = $request->date;

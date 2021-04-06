@@ -364,6 +364,7 @@
                         </p>
                     </div>
                 </div>
+                <input class="hidden" :value="JSON.stringify(items)" name="name" type="text">
                 <template x-for="invoice in items" :key="invoice.id">
                     <div class="flex flex-wrap -mx-1 py-2 border-b">
                         <div class="flex-1 px-1">
@@ -429,7 +430,33 @@
                         <div class="mb-4">
                             <label
                                 class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Description</label>
-                            <x-forms.input name="id" url="{{ route('customer.json') }}?query" />
+                            <div x-data="autocomplete('{{ route('customer.json') }}?query')">
+                                <input id="getName" class="name-input form-input bg-gray-200 border-gray-300 focus:border-indigo-400
+                                        focus:shadow-none focus:bg-white mt-1 block w-full" type="text"
+                                    x-model="inputValue" x-on:input.debounce.750="fetchData()">
+                                <input id="getId" class="hidden" type="text" :value="dataId" x-model="dataId"
+                                    type="hidden">
+                                {{-- Loop the data --}}
+                                <div x-show="listData"
+                                    class="absolute shadow top-100 z-40 lef-0 rounded overflow-y-auto svelte-5uyqqj">
+                                    <div class="flex flex-col">
+                                        <template x-for="item in storedData">
+                                            <div class="cursor-pointer w-auto border-gray-100 rounded-t border-b 
+                                                hover:bg-teal-100" style="">
+                                                <div
+                                                    class="flex items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:text-teal-100 hover:border-teal-600">
+                                                    <div class="items-center flex">
+                                                        <span @click.away="dissmissModal()"
+                                                            @click="returnData(item.id,item.name)"
+                                                            x-text="item.name"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                {{-- End loop data --}}
+                            </div>
                         </div>
 
                         <div class="flex">
@@ -814,9 +841,10 @@
             },
 
             addItem() {
+                // console.log();
                 this.items.push({
-                    id: this.generateUUID(),
-                    name: this.item.name,
+                    id: document.getElementById('getId').value,
+                    name: document.getElementById('getName').value,
                     qty: this.item.qty,
                     rate: this.item.rate,
                     gst: this.calculateGST(this.item.gst, this.item.rate),
@@ -830,7 +858,7 @@
                 this.item.name = '';
                 this.item.qty = 0;
                 this.item.rate = 0;
-                this.item.gst = 18;
+                this.item.gst = 0;
                 this.item.total = 0;
             },
 
@@ -886,5 +914,34 @@
             }
         }
     }
+
+    function autocomplete(url) {
+            return {
+                storedData:[],
+                listData:false,
+                inputValue:null,
+                dataId:null,
+                log(){
+                    console.log(this.inputValue)
+                },
+                init(){
+                  console.log();  
+                },
+                dissmissModal(){
+                    this.listData=false;
+                },
+                returnData(id,name){
+                    this.inputValue=name;
+                    this.dataId=id;
+                },
+                fetchData(){
+                    fetch(`${url}=${this.inputValue}`)
+                          .then(response => response.json())
+                          .then(data => this.storedData = data);
+                        //   console.log(this.storedData);
+                          this.listData=true;
+                },
+            }
+        }
     </script>
     @endpush
