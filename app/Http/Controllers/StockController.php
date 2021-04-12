@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\StockMinusException;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Customer;
@@ -114,6 +115,8 @@ class StockController extends Controller
 
     public function saveTransaction(Request $request)
     {
+
+        // throw new StockMinusException('ke isi kah');
 
         //Parse array dari input
         $stocks = json_decode($request->details, true);
