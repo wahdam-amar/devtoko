@@ -22,7 +22,13 @@ class StockFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'amount' => $this->faker->numberBetween(1, 100),
+            'price_buy' => $this->faker->numberBetween(1, 100),
+            'price_sell' => $this->faker->numberBetween(1, 100),
+            'category_id' => $this->faker->numberBetween(1, 3),
+            'status' => 'AC',
+            'updated_at' => now()
         ];
     }
 }

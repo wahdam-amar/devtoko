@@ -32,10 +32,10 @@
                         </div>
                         <p class="text-sm text-gray-500 mt-4">
                             <span class="text-red-500 mr-2">
-                                <i class="fas fa-arrow-down"></i> 3.48%
+                                {{-- <i class="fas fa-arrow-down"></i> 3.48% --}}
                             </span>
                             <span class="whitespace-no-wrap">
-                                Since last week
+                                Total Jumlah Customer
                             </span>
                         </p>
                     </div>
@@ -67,10 +67,10 @@
                         </div>
                         <p class="text-sm text-gray-500 mt-4">
                             <span class="text-orange-500 mr-2">
-                                <i class="fas fa-arrow-down"></i> 1.10%
+                                {{-- <i class="fas fa-arrow-down"></i> 1.10% --}}
                             </span>
                             <span class="whitespace-no-wrap">
-                                Since yesterday
+                                Total Jumlah Stock
                             </span>
                         </p>
                     </div>
@@ -102,10 +102,10 @@
                         </div>
                         <p class="text-sm text-gray-500 mt-4">
                             <span class="text-green-500 mr-2">
-                                <i class="fas fa-arrow-up"></i> 12%
+                                {{-- <i class="fas fa-arrow-up"></i> 12% --}}
                             </span>
                             <span class="whitespace-no-wrap">
-                                Since last month
+                                Total Jumlah Supplier
                             </span>
                         </p>
                     </div>
@@ -116,7 +116,7 @@
 </div>
 
 <div class="mt-12">
-    <h2 class="text-2xl font-medium">Tables</h2>
+    <h2 class="text-2xl font-medium">Stock</h2>
     <div class="mt-4">
         <div class="flex flex-col">
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
