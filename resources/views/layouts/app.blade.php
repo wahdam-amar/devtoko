@@ -47,6 +47,7 @@
                 <main>
                     <!-- Replace with your content -->
                     <div class="px-8 py-6">
+                        @include('component.alert')
                         @yield('content')
                     </div>
                     <!-- /End replace -->
@@ -57,6 +58,13 @@
             </form>
         </div>
     </div>
+
+    <script>
+        window.onload = function(e){
+            // https://flatpickr.js.org/
+            flatpickr(".flatpickr");
+        }
+    </script>
     @stack('scripts')
 
 </body>

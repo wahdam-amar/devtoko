@@ -5,9 +5,6 @@
     <h2 class="text-2xl font-medium">Category</h2>
     <div class="mt-4">
 
-        @include('component.error')
-
-        @include('component.alert')
         <form method="post" action="{{ route('category.store') }}">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                 @csrf
@@ -23,6 +20,7 @@
             </button>
             @include('component.BackButton')
         </form>
+
     </div>
 </div>
 @endsection

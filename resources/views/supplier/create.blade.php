@@ -5,9 +5,6 @@
     <h2 class="text-2xl font-medium">Supplier</h2>
     <div class="mt-4">
 
-        @include('component.error')
-
-        @include('component.alert')
         <form method="post" action="{{ route('supplier.store') }}">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                 @csrf

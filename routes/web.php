@@ -44,12 +44,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('transaction', [\App\Http\Controllers\StockController::class, 'transaction'])->name('stock.transaction');
     Route::post('transaction', [\App\Http\Controllers\StockController::class, 'saveTransaction'])->name('stock.save');
+    Route::get('invoice', [\App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
     Route::resource('category', \App\Http\Controllers\CategoryController::class);
 });
 
+
+/**
+ * Kebutuhan Dev
+ */
+
 Route::view('/ui', 'ui.index')->name('ui');
 
-Route::view('/invoice', 'invoice.index');
+Route::view('/invoicetest', 'invoice.index');
 
 Route::get('/custom', function () {
     dd(getCategory());

@@ -28,12 +28,19 @@ class HomeController extends Controller
     {
 
         $totalCustomers = Customer::whereStatus('AC')->count();
-        $totalStocks = Stock::whereStatus('AC')->count();
+
+        $Stocks = Stock::whereStatus('AC');
+
+        $totalStocks = $Stocks->count();
+
+        $warningStocks = $Stocks->with('category')->where('amount', '<', 50)->get();
+
         $totalSuppliers = Supplier::whereStatus('AC')->count();
 
         return view('home')
             ->with('customer', $totalCustomers)
             ->with('supplier', $totalSuppliers)
-            ->with('stock', $totalStocks);
+            ->with('stock', $totalStocks)
+            ->with('warning', $warningStocks);
     }
 }

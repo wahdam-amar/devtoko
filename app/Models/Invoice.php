@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Invoice extends Model
 {
@@ -29,24 +30,10 @@ class Invoice extends Model
         'due' => 'date'
     ];
 
-    // protected $config = [
-    //     'table' => 'invoice',
-    //     'length' => 10,
-    //     'prefix' => 'INV-' . date('ym')
-    // ];
-
     function getPrefixAttribute()
     {
         return IdGenerator::generate(['table' => 'invoice', 'field' => 'no', 'length' => 10, 'prefix' => 'INV-' . date('ym')]);
     }
-
-    // now use it
-    // $id = IdGenerator::generate($config);
-
-    // // use within single line code
-    // $id = IdGenerator::generate(['table' => 'todos', 'length' => 6, 'prefix' => date('y')]);
-
-    // output: 160001
 
     public static function boot()
     {
@@ -54,5 +41,15 @@ class Invoice extends Model
         self::creating(function ($model) {
             $model->no = IdGenerator::generate(['table' => 'invoice', 'field' => 'no', 'length' => 10, 'prefix' => 'INV-' . date('ym')]);
         });
+    }
+
+    /**
+     * Get the customer that owns the Invoice
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
     }
 }

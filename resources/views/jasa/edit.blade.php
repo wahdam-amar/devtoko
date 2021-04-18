@@ -5,9 +5,6 @@
     <h2 class="text-2xl font-medium">Jasa</h2>
     <div class="mt-4">
 
-        @include('component.error')
-
-        @include('component.alert')
         <form method="POST" action="{{ route('jasa.update',$jasa->id) }}">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                 {{ csrf_field() }}

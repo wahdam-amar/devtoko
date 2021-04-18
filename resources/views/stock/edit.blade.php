@@ -5,9 +5,6 @@
     <h2 class="text-2xl font-medium">Stock</h2>
     <div class="mt-4">
 
-        @include('component.error')
-
-        @include('component.alert')
         <form method="post" action="{{ route('stock.update',$stock->id) }}">
             @csrf
             @method('PUT')

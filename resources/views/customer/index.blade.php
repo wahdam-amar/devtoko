@@ -9,7 +9,6 @@
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
 
-    @include('component.alert')
     @include('component.datePicker')
 
     <div class="mt-4">
@@ -111,14 +110,6 @@
 @endsection
 
 @push('scripts')
-{{-- for date --}}
-<script>
-    window.onload = function(e){
-        // https://flatpickr.js.org/
-        flatpickr(".flatpickr");
-    }
-</script>
-
 {{-- script for modal --}}
 <script>
     const modal = document.querySelector('.main-modal');

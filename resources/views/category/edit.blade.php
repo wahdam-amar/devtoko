@@ -4,10 +4,6 @@
 <div class="bg-white p-6 rounded shadow mt-4">
     <h2 class="text-2xl font-medium">Category</h2>
     <div class="mt-4">
-
-        @include('component.error')
-
-        @include('component.alert')
         <form method="POST" action="{{ route('category.update',$category->id) }}">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                 {{ csrf_field() }}
