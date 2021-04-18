@@ -106,7 +106,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $customer = Customer::firstOrFail($customer->id);
+        $customer = Customer::findOrFail($customer->id);
 
         return view('customer.edit')->with('customer', $customer);
     }
