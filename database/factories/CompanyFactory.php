@@ -22,7 +22,7 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Pdp',
+            'name' => 'PT Pranaja Diesel Parts',
             'address' => 'Jakarta',
             'description' => 'Toko Spare Part Mobil',
         ];
