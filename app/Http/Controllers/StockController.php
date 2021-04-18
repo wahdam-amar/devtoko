@@ -25,12 +25,20 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // \Illuminate\Support\Facades\DB::enableQueryLog();
-        $Stocks = Stock::with('category')->whereStatus('AC')->latest('id')->paginate(15);
+        $query = Stock::query();
 
-        // dd(\Illuminate\Support\Facades\DB::getQueryLog());
+        $query->when($request->filled('startdate'), function ($query) {
+            $query->where('created_at', '>', request('startdate'));
+        });
+
+        $query->when($request->filled('enddate'), function ($query) {
+            $query->where('created_at', '<', request('enddate'));
+        });
+
+        $Stocks = $query->with('category')->whereStatus('AC')->latest()->paginate(15);
+
         return view('stock.index')->with('stocks', $Stocks);
     }
 

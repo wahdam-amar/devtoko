@@ -50,7 +50,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $ekspedisi->links() }}
+                {{ $ekspedisi->withQueryString()->links() }}
             </div>
         </div>
     </div>

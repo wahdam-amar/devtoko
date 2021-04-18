@@ -48,7 +48,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $category->links() }}
+                {{ $category->withQueryString()->links() }}
             </div>
         </div>
     </div>

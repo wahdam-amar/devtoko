@@ -12,10 +12,19 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $category = Category::whereStatus('AC')->latest('id')->paginate(15);
+        $query = Category::query();
 
+        $query->when($request->filled('startdate'), function ($query) {
+            $query->where('created_at', '>', request('startdate'));
+        });
+
+        $query->when($request->filled('enddate'), function ($query) {
+            $query->where('created_at', '<', request('enddate'));
+        });
+
+        $category = $query->whereStatus('AC')->latest()->paginate(15);
 
         return view('category.index')->with('category', $category);
     }

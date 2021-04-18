@@ -12,7 +12,6 @@
         class="mx-2 px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded">Transaksi
     </a>
 
-    @include('component.alert')
     @include('component.datePicker')
 
     <div class="mt-4">
@@ -68,7 +67,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $stocks->links() }}
+                {{ $stocks->withQueryString()->links() }}
             </div>
         </div>
     </div>

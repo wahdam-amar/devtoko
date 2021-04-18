@@ -6,7 +6,6 @@
 
 
     <div class="border-t-8 border-gray-700 h-2"></div>
-    @include('component.alert')
     <div class="container mx-auto py-6 px-4" x-data="invoices()" x-init="generateInvoiceNumber(111111, 999999);"
         x-cloak>
         <form method="post" action="{{ route('invoice.store') }}">

@@ -61,7 +61,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $customer->links() }}
+                {{ $customer->withQueryString()->links() }}
             </div>
         </div>
     </div>

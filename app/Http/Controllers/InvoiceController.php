@@ -10,10 +10,19 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = Invoice::query();
 
-        $invoices = Invoice::with('customer')->whereStatus('AC')->latest()->paginate(15);
+        $query->when($request->filled('startdate'), function ($query) {
+            $query->where('created_at', '>', request('startdate'));
+        });
+
+        $query->when($request->filled('enddate'), function ($query) {
+            $query->where('created_at', '<', request('enddate'));
+        });
+
+        $invoices = $query->with('customer')->whereStatus('AC')->latest()->paginate(15);
 
         return view('invoice.index')->with('invoices', $invoices);
     }
@@ -29,7 +38,15 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'date' => 'required|date',
+            'duedate' => 'required|date',
+            'customer' => 'required',
+            'details' => 'required',
+        ]);
+
+        // dd($request->all());
 
         // throw new StockMinusException('ke isi kah');
 

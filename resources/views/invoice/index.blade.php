@@ -4,8 +4,7 @@
 
 <div class="bg-white p-6 rounded shadow">
     <h2 class="mb-2 text-2xl font-medium">Invoice</h2>
-    @include('component.alert')
-    <a href="{{ route('jasa.create') }}"
+    <a href="{{ route('invoice.create') }}"
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
     <div class="mt-4">
@@ -50,7 +49,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $invoices->links() }}
+                {{ $invoices->withQueryString()->links() }}
             </div>
         </div>
     </div>

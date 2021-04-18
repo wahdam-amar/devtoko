@@ -12,10 +12,19 @@ class EkspedisiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ekspedisi = Ekspedisi::whereStatus('AC')->latest()->paginate(15);
+        $query = Ekspedisi::query();
 
+        $query->when($request->filled('startdate'), function ($query) {
+            $query->where('created_at', '>', request('startdate'));
+        });
+
+        $query->when($request->filled('enddate'), function ($query) {
+            $query->where('created_at', '<', request('enddate'));
+        });
+
+        $ekspedisi = $query->whereStatus('AC')->latest()->paginate(15);
 
         return view('ekspedisi.index')->with('ekspedisi', $ekspedisi);
     }

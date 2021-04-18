@@ -4,10 +4,13 @@
 
 <div class="bg-white p-6 rounded shadow">
     <h2 class="mb-2 text-2xl font-medium">Supplier</h2>
-    @include('component.alert')
+
     <a href="{{ route('supplier.create') }}"
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
+
+    @include('component.datePicker')
+
     <div class="mt-4">
         <div class="flex flex-col">
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6">
@@ -57,7 +60,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $supplier->links() }}
+                {{ $supplier->withQueryString()->links() }}
             </div>
         </div>
     </div>

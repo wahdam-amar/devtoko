@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -28,10 +29,19 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customer = Customer::whereStatus('AC')->latest()->paginate(15);
+        $query = Customer::query();
 
+        $query->when($request->filled('startdate'), function ($query) {
+            $query->where('created_at', '>', request('startdate'));
+        });
+
+        $query->when($request->filled('enddate'), function ($query) {
+            $query->where('created_at', '<', request('enddate'));
+        });
+
+        $customer = $query->whereStatus('AC')->latest()->paginate(15);
 
         return view('customer.index')->with('customer', $customer);
     }

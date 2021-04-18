@@ -27,6 +27,7 @@ class CustomerFactory extends Factory
             'name' => $this->faker->name,
             'phone' => $this->faker->phoneNumber,
             'status' => 'AC',
+            'created_at' => $this->faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = null)
         ];
     }
 }

@@ -52,7 +52,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $jasa->links() }}
+                {{ $jasa->withQueryString()->links() }}
             </div>
         </div>
     </div>
