@@ -8,7 +8,7 @@
     <a href="{{ route('stock.create') }}"
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
     </a>
-    <a href="{{ route('stock.transaction') }}"
+    <a href="{{ route('invoice.create') }}"
         class="mx-2 px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded">Transaksi
     </a>
 

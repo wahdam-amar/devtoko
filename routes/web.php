@@ -44,7 +44,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('transaction', [\App\Http\Controllers\StockController::class, 'transaction'])->name('stock.transaction');
     Route::post('transaction', [\App\Http\Controllers\StockController::class, 'saveTransaction'])->name('stock.save');
-    Route::get('invoice', [\App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
+
+    Route::resource('invoice', \App\Http\Controllers\InvoiceController::class);
     Route::resource('category', \App\Http\Controllers\CategoryController::class);
 });
 

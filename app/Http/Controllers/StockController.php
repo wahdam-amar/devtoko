@@ -2,23 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\StockMinusException;
 use App\Models\Category;
-use App\Models\Company;
-use App\Models\Customer;
-use App\Models\Invoice;
-use App\Models\InvoiceDetail;
 use App\Models\Stock;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
+
 
 class StockController extends Controller
 {
 
     public function indexJson(Request $request)
     {
-
         $customer = Stock::whereStatus('AC')
             ->where("name", "LIKE", "%{$request->input('search')}%")->latest()->limit(5)->get();
 
@@ -34,9 +27,7 @@ class StockController extends Controller
      */
     public function index()
     {
-
         // \Illuminate\Support\Facades\DB::enableQueryLog();
-
         $Stocks = Stock::with('category')->whereStatus('AC')->latest('id')->paginate(15);
 
         // dd(\Illuminate\Support\Facades\DB::getQueryLog());
@@ -97,52 +88,6 @@ class StockController extends Controller
     public function show(Stock $stock)
     {
         //
-    }
-
-    /**
-     * Transaction the specified resource.
-     *
-     * @param  \App\Models\Stock  $stock
-     * @return \Illuminate\Http\Response
-     */
-    public function transaction(Stock $stock)
-    {
-
-        $company = Company::find(1)->first();
-
-        return view('stock.transaction')->with('company', $company);
-    }
-
-    public function saveTransaction(Request $request)
-    {
-
-        // throw new StockMinusException('ke isi kah');
-
-        //Parse array dari input
-        $stocks = json_decode($request->details, true);
-        // dd($request->all());
-
-
-        // Buar headernya
-        $invoice = new Invoice();
-        // $invoice->no = $request->header;
-        $invoice->date = $request->date;
-        $invoice->due = $request->duedate;
-        $invoice->customer_id = $request->customer;
-        $invoice->amount = $request->amount ?? 100;
-        $invoice->save();
-
-        // loop lalu insert ke detail
-        foreach ($stocks as $stock) {
-            $detail = new InvoiceDetail();
-            $detail->invoice_no = $invoice->no;
-            $detail->stock_id = $stock['id'];
-            $detail->quantity = $stock['qty'];
-            $detail->save();
-            // var_dump($stock['id']);
-        }
-
-        return back()->with('message', $invoice->no . ' Sukses di buat');
     }
 
     /**

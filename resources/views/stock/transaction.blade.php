@@ -9,7 +9,7 @@
     @include('component.alert')
     <div class="container mx-auto py-6 px-4" x-data="invoices()" x-init="generateInvoiceNumber(111111, 999999);"
         x-cloak>
-        <form method="post" action="{{ route('stock.save') }}">
+        <form method="post" action="{{ route('invoice.store') }}">
             @csrf
             @method('POST')
 

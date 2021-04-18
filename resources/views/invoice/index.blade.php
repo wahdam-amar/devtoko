@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="bg-white p-6 rounded shadow">
-    <h2 class="mb-2 text-2xl font-medium">Jasa</h2>
+    <h2 class="mb-2 text-2xl font-medium">Invoice</h2>
     @include('component.alert')
     <a href="{{ route('jasa.create') }}"
         class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded">New
@@ -22,7 +22,7 @@
                         'Name',
                         'Date',
                         'Amount',
-                        'Action'
+                        'DueDate'
                         ]])
                         <tbody class="bg-white">
                             @foreach ($invoices as $item)
@@ -34,19 +34,15 @@
                                     {{ $item->customer->name }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    {{ Str::of($item->date)->title() }}
+                                    {{  $item->date->toDateString() }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     {{ $item->amount }}
                                 </td>
-                                {{-- <td
-                                    class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-                                    @include('component.tableAction',[
-                                    'route' => 'jasa.edit',
-                                    'id' => $item->no,
-                                    'name' => $item->amount,
-                                    ])
-                                </td> --}}
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    {{  $item->due->toDateString() }}
+                                </td>
+
                             </tr>
                             @endforeach
                         </tbody>
