@@ -46,14 +46,8 @@ class InvoiceController extends Controller
             'details' => 'required',
         ]);
 
-        // dd($request->all());
-
-        // throw new StockMinusException('ke isi kah');
-
         //Parse array dari input
         $stocks = json_decode($request->details, true);
-        // dd($request->all());
-
 
         // Buar headernya
         $invoice = new Invoice();
@@ -71,7 +65,6 @@ class InvoiceController extends Controller
             $detail->stock_id = $stock['id'];
             $detail->quantity = $stock['qty'];
             $detail->save();
-            // var_dump($stock['id']);
         }
 
         return back()->with('message', $invoice->no . ' Sukses di buat');

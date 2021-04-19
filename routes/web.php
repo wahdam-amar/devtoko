@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::resource('customer', \App\Http\Controllers\CustomerController::class);
     Route::get('/json/customer', [\App\Http\Controllers\CustomerController::class, 'indexJson'])->name('customer.json');
+    Route::get('customer/{customer}/invoice', [\App\Http\Controllers\CustomerController::class, 'invoice'])->name('customer.invoice');
 
     Route::resource('supplier', \App\Http\Controllers\SupplierController::class);
     Route::resource('ekspedisi', \App\Http\Controllers\EkspedisiController::class);

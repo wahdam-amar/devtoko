@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -95,7 +96,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return redirect()->route('customer.edit', $customer);
     }
 
     /**
@@ -148,12 +149,22 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer = Customer::firstOrFail($customer->id);
+        $customer = Customer::findtOrFail($customer->id);
 
         $customer->status = 'Na';
         $customer->save();
 
-
         return back()->with('message', $customer->name . ' Berhasil di hapus');
+    }
+
+    public function invoice($customer)
+    {
+        $customerName = Customer::where('id', $customer)->first();
+
+        $invoice = Invoice::with('customer')->where('customer_id', $customer)->paginate(15);
+
+        return view('customer.invoices')
+            ->with('invoice', $invoice)
+            ->with('customer', $customerName);
     }
 }

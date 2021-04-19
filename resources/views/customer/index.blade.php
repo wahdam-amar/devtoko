@@ -33,7 +33,9 @@
                                     {{ $item->id }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    {{ $item->name }}
+                                    <a class="text-purple-500"
+                                        href="{{ route('customer.invoice',$item->id) }}">{{ $item->name }}</a>
+
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     {{ $item->address }}
