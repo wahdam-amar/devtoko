@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Invoice;
+use Barryvdh\Debugbar\Middleware\DebugbarEnabled;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,12 +18,22 @@ class CustomerController extends Controller
     public function indexJson(Request $request)
     {
 
-        $customer = Customer::whereStatus('AC')
-            ->where("name", "LIKE", "%{$request->input('query')}%")->latest()->limit(5)->get();
+        $customer = Customer::query()
+            ->where(function ($query) {
+                return $query
+                    ->where('name', 'LIKE', '%' . request('query') . '%')
+                    ->orWhere('id', 'LIKE', '%' . request('query') . '%');
+            })
+            ->get();
 
-        return response()->json(
-            $customer,
-        );
+
+        return $customer;
+
+
+
+        // return response()->json(
+        //     $customer->latest()->limit(5)->get(),
+        // );
     }
 
     /**
