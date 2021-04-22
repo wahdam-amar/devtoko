@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Invoice;
 use Barryvdh\Debugbar\Middleware\DebugbarEnabled;
+use ErrorException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+
+use function PHPUnit\Framework\throwException;
 
 class CustomerController extends Controller
 {
@@ -118,7 +123,18 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $customer = Customer::findOrFail($customer->id);
+        try {
+            $customer = Customer::findOrFail($customer->id);
+
+            if (Str::contains($customer->status, [
+                'NA',
+                'RJ'
+            ])) {
+                throw new ErrorException('Customer tidak aktif');
+            }
+        } catch (\Throwable $th) {
+            return back()->withErrors($th->getFile() . ' ' . $th->getLine() . ' ' . $th->getMessage());
+        }
 
         return view('customer.edit')->with('customer', $customer);
     }

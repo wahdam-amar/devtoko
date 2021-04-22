@@ -69,4 +69,12 @@ class InvoiceController extends Controller
 
         return back()->with('message', $invoice->no . ' Sukses di buat');
     }
+
+    public function show($invoiceNo)
+    {
+        $invoice = Invoice::query()
+            ->where('no', $invoiceNo);
+
+        return $invoice->get();
+    }
 }
