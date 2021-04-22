@@ -133,7 +133,9 @@ class CustomerController extends Controller
                 throw new ErrorException('Customer tidak aktif');
             }
         } catch (\Throwable $th) {
-            return back()->withErrors($th->getFile() . ' ' . $th->getLine() . ' ' . $th->getMessage());
+            return view('customer.edit')
+                ->with('customer', $customer)
+                ->withErrors($th->getMessage());
         }
 
         return view('customer.edit')->with('customer', $customer);
