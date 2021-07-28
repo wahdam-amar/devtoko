@@ -21,43 +21,38 @@
                     class="mb-6 align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
                     <table class="min-w-full">
                         @include('component.thead',['head'=>[
-                        'Id',
-                        'Name',
-                        'Keterangan',
-                        'Kategori',
+                        'Invoice No',
                         'Jumlah',
+                        'Nama Stock',
+                        'Tanggal',
                         'Action'
                         ]])
                         <tbody class="bg-white">
-                            @foreach ($stocks as $item)
+                            @foreach ($stocksPaginate as $item)
                             <tr>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    {{ $item->id }}
+                                    {{ Str::of($item->invoice_no)->upper() }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    {{ Str::of($item->name)->title() }}
+                                    {{ Str::of($item->quantity)->title() }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    {{ Str::of($item->desc)->title() }}
+                                    {{ Str::of($item->stock->name)->title() }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    {{ Str::of($item->category->name)->title() }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    {{ $item->amount }}
+                                    {{ $item->created_at }}
                                 </td>
                                 <td
                                     class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-
+                                    {{-- 
                                     @include('component.tableAction',[
                                     'route' => 'stock.edit',
                                     'id' => $item->id,
                                     'name' => $item->name,
-                                    ])
+                                    ]) --}}
 
-                                    <button onclick="location.href='{{ route('stock.history', $item->id) }}'"
-                                        type="button"
-                                        class="px-2 py-1 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded">History
+                                    <button onclick="location.href='{{ route('home') }}'" type="button"
+                                        class="px-2 py-1 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded">Detail
                                     </button>
 
                                 </td>
@@ -68,7 +63,7 @@
                 </div>
 
                 {{-- pagination link --}}
-                {{ $stocks->withQueryString()->links() }}
+                {{ $stocksPaginate->withQueryString()->links() }}
             </div>
         </div>
     </div>
