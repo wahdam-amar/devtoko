@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
@@ -152,5 +154,12 @@ class StockController extends Controller
         $stock->save();
 
         return back()->with('message', $stock->name . ' Berhasil di hapus');
+    }
+
+    public function history($stock)
+    {
+        $stocksPaginate = InvoiceDetail::query()->with('stock')->where('stock_id', $stock)->latest()->paginate(10);
+        return view('stock.history')
+            ->with('stocksPaginate', $stocksPaginate);
     }
 }

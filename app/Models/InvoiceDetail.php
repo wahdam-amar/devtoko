@@ -34,4 +34,9 @@ class InvoiceDetail extends Model
     {
         return $this->belongsTo(Invoice::class, 'invoice_no', 'no');
     }
+
+    public function stock()
+    {
+        return $this->belongsTo(Stock::class);
+    }
 }
