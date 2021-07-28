@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('stock', \App\Http\Controllers\StockController::class);
     Route::get('json/stock', [\App\Http\Controllers\StockController::class, 'indexJson'])->name('stock.json');
+    Route::get('stock/history/{stock}', [\App\Http\Controllers\StockController::class, 'history'])->name('stock.history');
 
     Route::get('transaction', [\App\Http\Controllers\StockController::class, 'transaction'])->name('stock.transaction');
     Route::post('transaction', [\App\Http\Controllers\StockController::class, 'saveTransaction'])->name('stock.save');
