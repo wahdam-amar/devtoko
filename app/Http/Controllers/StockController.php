@@ -148,6 +148,9 @@ class StockController extends Controller
      */
     public function destroy(Stock $stock)
     {
-        //
+        $stock->status = 'NA';
+        $stock->save();
+
+        return back()->with('message', $stock->name . ' Berhasil di hapus');
     }
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +21,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('customer', \App\Http\Controllers\CustomerController::class);
-
-    Route::get('/json/customer', [\App\Http\Controllers\CustomerController::class, 'indexJson'])->name('customer.json');
-
+    Route::get('json/customer', [\App\Http\Controllers\CustomerController::class, 'indexJson'])->name('customer.json');
     Route::get('customer/{customer}/invoice', [\App\Http\Controllers\CustomerController::class, 'invoice'])->name('customer.invoice');
 
     Route::resource('supplier', \App\Http\Controllers\SupplierController::class);
@@ -37,11 +34,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('jasa', \App\Http\Controllers\JasaController::class);
 
     Route::resource('stock', \App\Http\Controllers\StockController::class);
-
-    Route::get('/json/stock', [\App\Http\Controllers\StockController::class, 'indexJson'])->name('stock.json');
+    Route::get('json/stock', [\App\Http\Controllers\StockController::class, 'indexJson'])->name('stock.json');
 
     Route::get('transaction', [\App\Http\Controllers\StockController::class, 'transaction'])->name('stock.transaction');
-
     Route::post('transaction', [\App\Http\Controllers\StockController::class, 'saveTransaction'])->name('stock.save');
 
     Route::resource('invoice', \App\Http\Controllers\InvoiceController::class);
