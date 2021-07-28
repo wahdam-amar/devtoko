@@ -1,0 +1,11 @@
+1. Install Xampp
+2. hapus file .env lalu rubah nama .envProd menjadi .env 
+3. Run Install.sh
+4. Jalankan start.bat
+
+Login :
+email : dev@admin.com
+password : admin
+
+#note 
+Jika komputer di restart / shutdown Xampp dan start.bat harus di jalankan lagi sebelum aplikasi di buka
